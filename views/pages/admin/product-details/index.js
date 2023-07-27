@@ -1,8 +1,8 @@
 import { blockIfNotAdmin, isNull } from '/utils/index.js';
 blockIfNotAdmin();
 import * as API from '/api/index.js';
-import categoryModal from '/components/category-modal.js';
-window.callbackCategoryModal = function (result) {
+import '/components/CategoryModal.js';
+const callbackCategoryModal = function (result) {
   console.log(result);
   const categoryName = document.getElementById('categoryName');
   const categoryId = document.getElementById('categoryId');
@@ -12,7 +12,9 @@ window.callbackCategoryModal = function (result) {
   categoryId.value = result.categoryId;
   subcategoryId.value = result.subcategoryId ? result.subcategoryId : '';
 };
-categoryModal();
+const CategoryModal = document.createElement('category-modal');
+CategoryModal.modalCallback = callbackCategoryModal;
+document.getElementById('categoryModal').appendChild(CategoryModal);
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
