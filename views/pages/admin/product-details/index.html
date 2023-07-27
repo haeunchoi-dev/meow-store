@@ -11,17 +11,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="/common/global.css" />
+    <script type="module" src="/components/AdminHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="/components/category-modal.css" />
-    <script defer src="/components/admin-header.js"></script>
-    <script defer src="/components/footer.js"></script>
     <link rel="stylesheet" href="index.css" />
     <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
 
   <body>
-    <header class="header"></header>
+    <admin-header></admin-header>
 
     <!-- 메인 -->
     <main>
@@ -114,6 +113,6 @@
 
     <div class="modal" id="modal-category"></div>
 
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>
