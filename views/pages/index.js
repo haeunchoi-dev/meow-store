@@ -1,11 +1,16 @@
 //header에 nav추가
-document.querySelector('header').insertAdjacentHTML(
-  'beforeend',
-  `<nav class = "mainNav">
+document
+  .querySelector('common-header')
+  .shadowRoot.querySelector('header')
+  .insertAdjacentHTML(
+    'beforeend',
+    `<nav class = "mainNav">
 </nav>`,
-);
+  );
 
-const mainNav = document.querySelector('.mainNav');
+const mainNav = document
+  .querySelector('common-header')
+  .shadowRoot.querySelector('.mainNav');
 function clickNav(o, categoryId) {
   const lis = mainNav.querySelectorAll('li');
   lis.forEach((li) => {

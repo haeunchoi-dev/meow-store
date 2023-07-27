@@ -7,19 +7,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="/common/global.css" />
+    <script type="module" src="./components/CommonHeader.js"></script>
+    <script type="module" src="./components/CommonFooter.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <script defer src="/components/header.js"></script>
-    <script defer src="/components/footer.js"></script>
     <script defer src="index.js"></script>
-    <!-- <script defer type="module" src="../api/index.js"></script> -->
     <title>야옹 잡화점</title>
   </head>
   <body>
-    <!-- 1. header class를 가진 header요소 만들기 -->
-    <header class="header"></header>
+    <common-header></common-header>
 
-    <!-- main 요소에 본인 작업 넣기 -->
     <main>
       <section class="allItems">
         <div class="item-box"></div>
@@ -28,7 +24,6 @@
       </section>
     </main>
 
-    <!-- footer클래스를 가진 footer만들기 -->
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>
