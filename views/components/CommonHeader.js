@@ -199,7 +199,7 @@ class CommonHeader extends HTMLElement {
             <div class="logo">
             <div class="img-box">
                 <a href ='/'>
-                <img src="/assets/로고.png">
+                  <img src="http://${location.host}/assets/로고.png" alt="로고">
                 </a>
             </div>
             <div class="span-container">
