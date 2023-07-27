@@ -1,4 +1,4 @@
-const Category = require('../models/category-model');
+import Category from '../models/category-model';
 
 class CategoriesService {
   async getCategoryList() {
@@ -30,4 +30,4 @@ class CategoriesService {
 }
 
 const categoriesService = new CategoriesService();
-module.exports = categoriesService;
+export default categoriesService;

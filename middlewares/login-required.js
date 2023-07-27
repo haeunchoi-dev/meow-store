@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { getSecretKey } = require('../jwt/secret-key');
+import jwt from 'jsonwebtoken';
+import { getSecretKey } from '../jwt/secret-key';
 
 function loginRequired(req, res, next) {
   console.log(req.headers);
@@ -38,4 +38,4 @@ function loginRequired(req, res, next) {
   }
 }
 
-module.exports = loginRequired;
+export default loginRequired;

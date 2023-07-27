@@ -1,8 +1,8 @@
-const category = require('./category');
-const order = require('./order');
-const product = require('./product');
+import category from './category';
+import order from './order';
+import product from './product';
 
-module.exports = {
+export default {
   ...category,
   ...order,
   ...product,

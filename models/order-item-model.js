@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { moment } = require('../utils/moment');
-const orderItemSchema = require('./schemas/order-item');
+import mongoose from 'mongoose';
+import { moment } from '../utils/moment';
+import orderItemSchema from './schemas/order-item';
 
 const OrderItem = mongoose.model('order-items', orderItemSchema);
 
@@ -25,4 +25,4 @@ class OrderItemModel {
 }
 
 const orderItemModel = new OrderItemModel();
-module.exports = orderItemModel;
+export default orderItemModel;

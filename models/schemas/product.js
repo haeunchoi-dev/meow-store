@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose');
-const { moment } = require('../../utils/moment');
+import { Schema } from 'mongoose';
+import { moment } from '../../utils/moment';
 
 const ProductSchema = new Schema(
   {
@@ -61,4 +61,4 @@ const ProductSchema = new Schema(
   },
 );
 
-module.exports = ProductSchema;
+export default ProductSchema;

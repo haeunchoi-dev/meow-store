@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/api/member/orders': {
     get: {
       tags: ['Member Order'],

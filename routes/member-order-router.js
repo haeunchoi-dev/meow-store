@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const { loginRequired } = require('../middlewares');
-const orderController = require('../controllers/order-controller');
+import { Router } from 'express';
+import { loginRequired } from '../middlewares';
+import orderController from '../controllers/order-controller';
 const memberOrderRouter = Router();
 
 memberOrderRouter.post('/', loginRequired, orderController.createOrder);
@@ -17,4 +17,4 @@ memberOrderRouter.delete(
   orderController.removeOrderProducts,
 );
 
-module.exports = memberOrderRouter;
+export { memberOrderRouter };

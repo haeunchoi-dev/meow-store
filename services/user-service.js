@@ -1,7 +1,7 @@
-const User = require('../models/user-model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { getSecretKey } = require('../jwt/secret-key');
+import User from '../models/user-model';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { getSecretKey } from '../jwt/secret-key';
 
 class UserService {
   constructor(userModel) {
@@ -134,4 +134,4 @@ class UserService {
 //의존성주입이라곤 하지만 엄밀히 말하면 의존성 주입이 아니지 않나?
 //다른 방식이 있는지 찾아볼것
 const userService = new UserService(User);
-module.exports = userService;
+export default userService;

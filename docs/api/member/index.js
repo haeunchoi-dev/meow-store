@@ -1,7 +1,7 @@
-const order = require('./order');
-const orderList = require('./order-list');
+import order from './order';
+import orderList from './order-list';
 
-module.exports = {
+export default {
   ...order,
   ...orderList,
 };

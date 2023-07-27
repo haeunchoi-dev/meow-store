@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const { adminRequired, loginRequired } = require('../middlewares');
-const userController = require('../controllers/user-controller');
+import { Router } from 'express';
+import { adminRequired, loginRequired } from '../middlewares';
+import userController from '../controllers/user-controller';
 const userRouter = Router();
 
 userRouter.post('/register', userController.register);
@@ -22,4 +22,4 @@ userRouter.get('/mypage', loginRequired, userController.getUser); //TODO: admin 
 userRouter.post('/mypage', loginRequired, userController.updateUser); //TODO: admin 사용자가 다른 사용자 업데이트 가능
 userRouter.delete('/mypage', loginRequired, userController.deleteUser); //TODO: admin 사용자가 다른 사용자 탈퇴가능
 
-module.exports = userRouter;
+export { userRouter };

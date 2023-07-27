@@ -1,8 +1,8 @@
-const register = require('./register');
-const login = require('./login');
-const mypage = require('./mypage');
+import register from './register';
+import login from './login';
+import mypage from './mypage';
 
-module.exports = {
+export default {
   ...register,
   ...login,
   ...mypage,

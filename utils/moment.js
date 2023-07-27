@@ -1,7 +1,5 @@
-const moment = require('moment');
-require('moment-timezone');
+import moment from 'moment';
+import 'moment-timezone';
 moment.tz.setDefault('Asia/Seoul');
 
-module.exports = {
-  moment,
-};
+export { moment };

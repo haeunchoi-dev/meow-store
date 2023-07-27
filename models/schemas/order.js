@@ -1,6 +1,6 @@
-const { Schema } = require('mongoose');
-const { moment } = require('../../utils/moment');
-const { v4: uuidv4 } = require('uuid');
+import { Schema } from 'mongoose';
+import { moment } from '../../utils/moment';
+import { v4 as uuidv4 } from 'uuid';
 
 const OrderSchema = new Schema(
   {
@@ -86,4 +86,4 @@ function generateOrderNumber() {
   return `${moment().format('YYYYMMDDHHmmss')}${randomString}`;
 }
 
-module.exports = OrderSchema;
+export default OrderSchema;

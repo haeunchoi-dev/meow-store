@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/api/user/register': {
     post: {
       tags: ['User'],

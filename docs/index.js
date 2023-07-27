@@ -1,13 +1,12 @@
-const swaggerUI = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const Swagger = require('../handler/swagger');
+import swaggerUI from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
+import Swagger from '../handler/swagger';
 
-const admin = require('../docs/api/admin');
-const member = require('../docs/api/member');
-const user = require('../docs/api/user');
-const products = require('../docs/api/products');
-const product = require('../docs/api/product');
-//const categorys = require('../docs/api/categorys');
+import admin from '../docs/api/admin';
+import member from '../docs/api/member';
+import user from '../docs/api/user';
+import products from '../docs/api/products';
+import product from '../docs/api/product';
 
 class ApiDocs {
   #apiDocOption;
@@ -43,4 +42,4 @@ class ApiDocs {
   }
 }
 
-module.exports = ApiDocs;
+export default ApiDocs;

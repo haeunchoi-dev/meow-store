@@ -1,8 +1,8 @@
-const { startSession } = require('mongoose');
-const { moment } = require('../utils/moment');
-const Product = require('../models/product-model');
-const Order = require('../models/order-model');
-const OrderItem = require('../models/order-item-model');
+import { startSession } from 'mongoose';
+import { moment } from '../utils/moment';
+import Product from '../models/product-model';
+import Order from '../models/order-model';
+import OrderItem from '../models/order-item-model';
 
 class OrderService {
   async createOrder(
@@ -162,4 +162,4 @@ class OrderService {
 }
 
 const orderService = new OrderService();
-module.exports = orderService;
+export default orderService;

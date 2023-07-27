@@ -1,5 +1,5 @@
-const multer = require('multer');
-const path = require('path');
+import multer from 'multer';
+import path from 'path';
 
 const limits = {
   fieldNameSize: 200, // 필드명 사이즈 최대값 (기본값 100bytes)
@@ -47,4 +47,4 @@ const upload = multer({
   fileFilter: fileFilter, // 이미지 업로드 필터링 설정
 });
 
-module.exports = { upload };
+export { upload };

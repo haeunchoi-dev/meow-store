@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/api/admin/product': {
     post: {
       tags: ['Admin Product'],

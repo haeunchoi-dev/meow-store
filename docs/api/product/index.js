@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/api/product/{id}': {
     get: {
       tags: ['Product'],

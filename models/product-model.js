@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const {moment} = require('../utils/moment');
-const productSchema = require('./schemas/product');
+import mongoose from 'mongoose';
+import { moment } from '../utils/moment';
+import productSchema from './schemas/product';
 
 const Product = mongoose.model('products', productSchema);
 
@@ -50,4 +50,4 @@ class ProductModel {
 }
 
 const productModel = new ProductModel();
-module.exports = productModel;
+export default productModel;

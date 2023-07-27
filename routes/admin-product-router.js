@@ -1,7 +1,7 @@
-const { Router } = require('express');
-const { adminRequired } = require('../middlewares');
-const { upload } = require('../middlewares/multer');
-const productController = require('../controllers/product-controller');
+import { Router } from 'express';
+import { adminRequired } from '../middlewares';
+import { upload } from '../middlewares/multer';
+import productController from '../controllers/product-controller';
 const adminProductRouter = Router();
 
 adminProductRouter.post(
@@ -22,4 +22,4 @@ adminProductRouter.delete(
   productController.deleteProduct,
 );
 
-module.exports = adminProductRouter;
+export { adminProductRouter };
