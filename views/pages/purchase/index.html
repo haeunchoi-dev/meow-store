@@ -3,18 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/common/global.css" />
     <link rel="stylesheet" href="../../../common/mypage-aside.css" />
-    <link rel="stylesheet" href="../../../common/global.css" />
     <link rel="stylesheet" href="index.css" />
-    <script defer src="/components/header.js"></script>
-    <script defer src="/components/footer.js"></script>
+    <script type="module" src="../../../components/CommonHeader.js"></script>
+    <script type="module" src="../../../components/CommonFooter.js"></script>
     <script src="../../../components/mypage-aside.js" defer></script>
     <script defer type="module" src="index.js"></script>
     <title>구매 내역</title>
   </head>
   <body>
-    <header class="header"></header>
+    <common-header></common-header>
 
     <main>
       <!-- aside tab부분 -->
@@ -26,6 +24,6 @@
       </section>
     </main>
 
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>

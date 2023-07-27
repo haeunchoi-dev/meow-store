@@ -4,18 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>야옹 잡화점</title>
-    <link rel="stylesheet" href="../../../common/global.css" />
+    <script type="module" src="/components/CommonHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="../../../common/mypage-aside.css" />
     <link rel="stylesheet" href="index.css" />
     <script type="module" src="index.js" defer></script>
-    <script src="../../../components/header.js" defer></script>
-    <script src="../../../components/footer.js" defer></script>
     <script src="../../../components/mypage-aside.js" defer></script>
     <script type="module" src="../../../api/index.js" defer></script>
   </head>
   <body>
     <!-- header -->
-    <header class="header"></header>
+    <common-header></common-header>
     <main>
       <!-- aside tab부분 -->
       <aside class="aside-tab"></aside>
@@ -34,6 +33,6 @@
         </div>
       </section>
     </main>
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>
