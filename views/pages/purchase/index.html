@@ -3,11 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../common/mypage-aside.css" />
     <link rel="stylesheet" href="index.css" />
     <script type="module" src="../../../components/CommonHeader.js"></script>
     <script type="module" src="../../../components/CommonFooter.js"></script>
-    <script src="../../../components/mypage-aside.js" defer></script>
+    <script type="module" src="/components/MypageAside.js"></script>
     <script defer type="module" src="index.js"></script>
     <title>구매 내역</title>
   </head>
@@ -16,7 +15,7 @@
 
     <main>
       <!-- aside tab부분 -->
-      <aside class="aside-tab"></aside>
+      <mypage-aside></mypage-aside>
       <section class="purchase-list">
         <div class="content-wrap">
           <!-- 다른 구매 내역 항목들을 여기에 추가 -->
