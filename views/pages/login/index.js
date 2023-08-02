@@ -48,13 +48,6 @@ async function login() {
     const data = await response.json();
     if (response.ok) {
       alert(`정상적으로 로그인되었습니다.`);
-
-      const { token, isAdmin } = data;
-      localStorage.setItem('token', token);
-
-      if (isAdmin) {
-        localStorage.setItem('admin', 'admin');
-      }
       const { previouspage } = getUrlParams();
 
       if (previouspage) {

@@ -1,3 +1,4 @@
+import { getCookie } from '/utils/index.js';
 class AdminHeader extends HTMLElement {
   constructor() {
     super();
@@ -202,7 +203,7 @@ class AdminHeader extends HTMLElement {
 
   setEvent() {
     const self = this;
-    const admin = window.localStorage.getItem('admin');
+    const admin = getCookie('isAdmin');
     const userHome = self.shadow.querySelector('.user-home');
     const mainNav = self.shadow.querySelector('.mainNav');
 

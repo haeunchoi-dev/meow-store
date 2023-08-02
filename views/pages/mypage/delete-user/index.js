@@ -18,11 +18,6 @@ async function deleteUser() {
     const result = await API.delete('/api/user/mypage', '', {
       password,
     });
-    console.log(result);
-    if (localStorage.getItem('admin')) {
-      localStorage.removeItem('admin');
-    }
-    localStorage.removeItem('token');
     alert('탈퇴가 완료 되었습니다.');
     window.location.href = '/';
   } else {

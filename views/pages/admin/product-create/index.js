@@ -87,7 +87,7 @@ async function createProduct() {
 
   //validation 추가할것
 
-  const result = await API.post('/api/admin/product', formData, true, true);
+  const result = await API.post('/api/admin/product', formData, true);
 
   console.log(result);
   alert('제품등록이 완료되었습니다.');

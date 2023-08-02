@@ -1,32 +1,23 @@
-async function get(endpoint, params = '', errorAlert = true) {
+async function get(endpoint, params = '') {
   const apiUrl = `${endpoint}${params}`;
 
-  const res = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
+  const res = await fetch(apiUrl);
 
   const result = await res.json();
 
   if (!res.ok) {
     const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
-      throw new Error(message);
-    }
+    throw new Error(message);
   }
   return result;
 }
 
-async function post(endpoint, data, errorAlert = true, isForm = false) {
+async function post(endpoint, data = {}, isForm = false) {
   const apiUrl = endpoint;
   const bodyData = isForm ? data : JSON.stringify(data);
 
-  let headers = {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  };
+  let headers = {};
   if (!isForm) {
     headers['Content-Type'] = 'application/json';
   }
@@ -42,15 +33,12 @@ async function post(endpoint, data, errorAlert = true, isForm = false) {
   if (!res.ok) {
     const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
-      throw new Error(message);
-    }
+    throw new Error(message);
   }
   return result;
 }
 
-async function patch(endpoint, params = '', data, errorAlert = true) {
+async function patch(endpoint, params = '', data = {}) {
   const apiUrl = `${endpoint}${params}`;
   const bodyData = JSON.stringify(data);
 
@@ -58,7 +46,6 @@ async function patch(endpoint, params = '', data, errorAlert = true) {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: bodyData,
   });
@@ -68,16 +55,13 @@ async function patch(endpoint, params = '', data, errorAlert = true) {
   if (!res.ok) {
     const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
-      throw new Error(message);
-    }
+    throw new Error(message);
   }
 
   return result;
 }
 
-async function put(endpoint, params = '', data, errorAlert = true) {
+async function put(endpoint, params = '', data = {}) {
   const apiUrl = `${endpoint}${params}`;
   const bodyData = JSON.stringify(data);
 
@@ -85,7 +69,6 @@ async function put(endpoint, params = '', data, errorAlert = true) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: bodyData,
   });
@@ -95,16 +78,13 @@ async function put(endpoint, params = '', data, errorAlert = true) {
   if (!res.ok) {
     const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
-      throw new Error(message);
-    }
+    throw new Error(message);
   }
 
   return result;
 }
 
-async function del(endpoint, params = '', data, errorAlert = true) {
+async function del(endpoint, params = '', data = {}) {
   const apiUrl = `${endpoint}${params}`;
   const bodyData = JSON.stringify(data);
 
@@ -112,7 +92,6 @@ async function del(endpoint, params = '', data, errorAlert = true) {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: bodyData,
   });
@@ -122,10 +101,7 @@ async function del(endpoint, params = '', data, errorAlert = true) {
   if (!res.ok) {
     const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
-      throw new Error(message);
-    }
+    throw new Error(message);
   }
   return result;
 }

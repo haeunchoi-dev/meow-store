@@ -1,3 +1,5 @@
+import { getCookie } from '/utils/index.js';
+import { put } from '/api/index.js';
 class CommonHeader extends HTMLElement {
   constructor() {
     super();
@@ -228,8 +230,8 @@ class CommonHeader extends HTMLElement {
 
   setEvent() {
     const self = this;
-    const token = window.localStorage.getItem('token');
-    const admin = window.localStorage.getItem('admin');
+    const token = getCookie('loginToken');
+    const admin = getCookie('isAdmin');
 
     const login = self.shadow.querySelector('.header-span.login-text');
     const mypage = self.shadow.querySelector('.mypage');
@@ -244,16 +246,21 @@ class CommonHeader extends HTMLElement {
 
     login.addEventListener('click', function () {
       if (token) {
-        if (localStorage.getItem('admin')) {
-          localStorage.removeItem('admin');
-        }
-        localStorage.removeItem('token');
+        logout();
         alert('로그아웃 되었습니다.');
-        window.location.href = '/';
+        //window.location.href = '/';
       } else {
         window.location.href = '/login';
       }
     });
+  }
+}
+
+async function logout() {
+  try {
+    await put(`/api/user/logout`);
+  } catch (err) {
+    console.log(err);
   }
 }
 

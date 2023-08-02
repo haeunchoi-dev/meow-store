@@ -1,5 +1,5 @@
 export const checkLogin = () => {
-  const token = localStorage.getItem('token');
+  const token = getCookie('loginToken');
   if (!token) {
     // 현재 페이지의 url 주소 추출하기
     const pathname = window.location.pathname;
@@ -11,7 +11,7 @@ export const checkLogin = () => {
 };
 
 export const checkAdmin = async () => {
-  const token = localStorage.getItem('token');
+  const token = lgetCookie('loginToken');
 
   if (!token) {
     // 현재 페이지의 url 주소 추출하기
@@ -39,30 +39,27 @@ export const checkAdmin = async () => {
 };
 
 export const blockIfLogin = () => {
-  const token = localStorage.getItem('token');
-
-  if (token) {
-    alert('로그인 한 상태에서는 접근할 수 없는 페이지입니다.');
-    window.location.replace('/');
-  }
+  // const token = localStorage.getItem('token');
+  // if (token) {
+  //   alert('로그인 한 상태에서는 접근할 수 없는 페이지입니다.');
+  //   window.location.replace('/');
+  // }
 };
 
 export const blockIfNotLogin = () => {
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    alert('로그인 하지 않은 상태에서는 접근할 수 없는 페이지입니다.');
-    window.location.replace('/');
-  }
+  // const token = localStorage.getItem('token');
+  // if (!token) {
+  //   alert('로그인 하지 않은 상태에서는 접근할 수 없는 페이지입니다.');
+  //   window.location.replace('/');
+  // }
 };
 
 export const blockIfNotAdmin = () => {
-  const admin = localStorage.getItem('admin');
-
-  if (!admin) {
-    alert('관리자 전용 페이지입니다.');
-    window.location.replace('/');
-  }
+  // const admin = localStorage.getItem('admin');
+  // if (!admin) {
+  //   alert('관리자 전용 페이지입니다.');
+  //   window.location.replace('/');
+  // }
 };
 
 export const navigate = (pathname) => {
@@ -111,4 +108,18 @@ export const validateEmail = (email) => {
 
 export const isNull = (str) => {
   return str === null || str === undefined || str === '';
+};
+
+export const getCookie = (cookieName) => {
+  const cookieMap = {};
+  const cookies = document.cookie.split(';').map((c) => c.trim());
+
+  for (const cookie of cookies) {
+    const separatorIndex = cookie.indexOf('=');
+    const name = cookie.slice(0, separatorIndex),
+      value = cookie.slice(separatorIndex + 1);
+    cookieMap[name] = value;
+  }
+
+  return cookieMap[cookieName] || null;
 };

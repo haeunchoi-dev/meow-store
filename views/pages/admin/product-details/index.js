@@ -120,7 +120,6 @@ async function createProduct() {
     `/api/admin/product/${productId}`,
     formData,
     true,
-    true,
   );
 
   console.log(result);

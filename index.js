@@ -1,5 +1,7 @@
 import 'dotenv/config';
+import path from 'path';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { generateSecretKey } from './jwt/secret-key';
 import connectDB from './config/db';
@@ -24,15 +26,8 @@ generateSecretKey();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-
-app.use(express.static('views/pages'));
-app.use('/assets', express.static('views/assets'));
-app.use('/components', express.static('views/components'));
-app.use('/utils', express.static('views/utils'));
-app.use('/common', express.static('views/common'));
-app.use('/uploads', express.static('views/uploads'));
-app.use('/api', express.static('views/api'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
@@ -44,6 +39,17 @@ app.use('/api/admin/subcategory', adminSubCategoryRouter);
 app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
 app.use('/api/user', userRouter);
+
+app.use('/assets', express.static(path.join(__dirname, 'views/assets')));
+app.use(
+  '/components',
+  express.static(path.join(__dirname, 'views/components')),
+);
+app.use('/utils', express.static(path.join(__dirname, 'views/utils')));
+app.use('/common', express.static(path.join(__dirname, 'views/common')));
+app.use('/uploads', express.static(path.join(__dirname, 'views/uploads')));
+app.use('/api', express.static(path.join(__dirname, 'views/api')));
+app.use('/', express.static(path.join(__dirname, 'views/pages')));
 
 //swagger 적용
 function getSwaggerOption() {

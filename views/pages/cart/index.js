@@ -41,7 +41,9 @@ const deleteAllBtn = document.querySelector('.delete_all');
 const orderBtn = document.querySelector('#order_btn');
 
 function qtyUp(event) {
-  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
+  const qtyElement = event.target
+    .closest('div')
+    .querySelector('[name=product_qty]');
   const id = event.target.closest('.product_wrap').getAttribute('product_id');
 
   if (qtyElement.innerText === '9') {
@@ -61,7 +63,9 @@ function qtyUp(event) {
 }
 
 function qtyDown(event) {
-  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
+  const qtyElement = event.target
+    .closest('div')
+    .querySelector('[name=product_qty]');
   const id = event.target.closest('.product_wrap').getAttribute('product_id');
 
   if (Number(qtyElement.innerText) > 1) {
@@ -84,7 +88,9 @@ function deleteEach(event) {
   li.remove();
 
   const price = savedCartData.filter((o) => o._id === id)[0].price;
-  const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
+  const qty = event.target
+    .closest('.product_wrap')
+    .querySelector('.product_qty');
 
   priceSum -= price * Number(qty.innerText);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
@@ -113,6 +119,8 @@ orderBtn.addEventListener('click', () => {
     alert('장바구니에 상품이 없습니다.');
     return;
   }
-  if (localStorage.getItem('token')) location.href = '/order-create/';
-  else alert("로그인 후 주문 가능합니다.");
+  location.href = '/order-create/';
+  //TODO:onclick 지울것
+  // if (localStorage.getItem('token')) location.href = '/order-create/';
+  // else alert('로그인 후 주문 가능합니다.');
 });
