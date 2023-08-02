@@ -1,5 +1,5 @@
-const SubCategoriesService = require('../services/sub-category-service');
-const categoriesService = require('../services/category-service');
+import SubCategoriesService from '../services/sub-category-service';
+import categoriesService from '../services/category-service';
 
 class SubCategoryController {
   // 하위 카테고리 생성
@@ -83,4 +83,4 @@ class SubCategoryController {
   }
 }
 const subCategoryController = new SubCategoryController();
-module.exports = subCategoryController;
+export default subCategoryController;

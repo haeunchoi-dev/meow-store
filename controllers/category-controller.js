@@ -1,6 +1,6 @@
-const CategoriesService = require('../services/category-service');
-const categoriesService = require('../services/category-service');
-const subCategoryService = require('../services/sub-category-service');
+import CategoriesService from '../services/category-service';
+import categoriesService from '../services/category-service';
+import subCategoryService from '../services/sub-category-service';
 
 class CategoryController {
   async createCategory(req, res) {
@@ -83,4 +83,4 @@ class CategoryController {
 }
 
 const categoryController = new CategoryController();
-module.exports = categoryController;
+export default categoryController;

@@ -1,4 +1,4 @@
-const SubCategory = require('../models/sub-category-model');
+import SubCategory from '../models/sub-category-model';
 
 class SubCategoryService {
   async createCategory(id, subCategoryName) {
@@ -49,4 +49,4 @@ class SubCategoryService {
 }
 
 const subCategoryService = new SubCategoryService();
-module.exports = subCategoryService;
+export default subCategoryService;

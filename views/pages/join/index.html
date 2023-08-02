@@ -6,15 +6,14 @@
     <link rel="stylesheet" href="index.css" />
     <script src="index.js" type="module"></script>
     <title>회원가입</title>
-    <link rel="stylesheet" href="../../../common/global.css" />
+    <script type="module" src="/components/CommonHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="index.css" />
     <script src="index.js" defer></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="../../../components/header.js" defer></script>
-    <script src="../../../components/footer.js" defer></script>
   </head>
   <body>
-    <header class="header"></header>
+    <common-header></common-header>
     <section class="content-wrapper">
       <div class="content-wrap">
         <h2 class="title">회원가입</h2>
@@ -89,6 +88,6 @@
         </div>
       </div>
     </section>
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>

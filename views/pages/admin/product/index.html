@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="/common/global.css" />
-  <link rel="stylesheet" href="index.css">
-  <script defer src="/components/admin-header.js"></script>
-  <!-- <script defer src="/components/header.js"></script> -->
-  <script defer src="../../../components/footer.js"></script>
-  <script defer type="module" src="index.js"></script>
-  <title>야옹 잡화점</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script type="module" src="/components/AdminHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <script defer type="module" src="index.js"></script>
+    <title>야옹 잡화점</title>
+  </head>
 
-<body>
-  <header class="header"></header>
+  <body>
+    <admin-header></admin-header>
 
-  <main>
-    <div class="container">
-      <h1 class="title">상품 관리</h1>
-      <hr>
-    </div>
-    <div class="container">
-      <div class="total">
-        총 <b class="b2"></b>건
-      </div>
-      <hr>
-      <div class="btn_btw">
-        <button type="button" class="button" id="deleteRows">선택 상품 삭제</button>
-        <button type="button" class="button is-light" id="createBtn">+상품등록</button>
+    <main>
+      <div class="container">
+        <h1 class="title">상품 관리</h1>
+        <hr />
       </div>
       <div class="container">
-        <table class="product">
-          <thead>
-            <tr>
-              <td style="width: 60px;">선택</td>
-              <td style="width: 60px;">번호</td>
-              <td style="width: 120px;">이미지</td>
-              <td style="width: 400px;">상품명</td>
-              <td style="width: 300px;">카테고리</td>
-              <td style="width: 200px;">가격</td>
-              <td style="width: 150px;">관리</td>
-            </tr>
-          </thead>
-          <tbody id="table-body">
-            <!-- 상품 정보 반복 -->
-          </tbody>
-        </table>
+        <div class="total">총 <b class="b2"></b>건</div>
+        <hr />
+        <div class="btn_btw">
+          <button type="button" class="button" id="deleteRows">
+            선택 상품 삭제
+          </button>
+          <button type="button" class="button is-light" id="createBtn">
+            +상품등록
+          </button>
+        </div>
+        <div class="container">
+          <table class="product">
+            <thead>
+              <tr>
+                <td style="width: 60px">선택</td>
+                <td style="width: 60px">번호</td>
+                <td style="width: 120px">이미지</td>
+                <td style="width: 400px">상품명</td>
+                <td style="width: 300px">카테고리</td>
+                <td style="width: 200px">가격</td>
+                <td style="width: 150px">관리</td>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- 상품 정보 반복 -->
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>  
-  </main>
+    </main>
 
-  <footer class="footer"></footer>
-</body>
+    <common-footer></common-footer>
+  </body>
 </html>

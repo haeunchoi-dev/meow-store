@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const SubCategorySchema = require('./schemas/subcategory');
+import mongoose from 'mongoose';
+import SubCategorySchema from './schemas/subcategory';
 const SubCategory = mongoose.model('SubCategory', SubCategorySchema);
 
 class SubCategoryModel {
@@ -50,4 +50,4 @@ class SubCategoryModel {
 
 const subCategoryModel = new SubCategoryModel();
 
-module.exports = subCategoryModel;
+export default subCategoryModel;

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const CategorySchema = require('./schemas/category');
+import mongoose from 'mongoose';
+import CategorySchema from './schemas/category';
 
 const Category = mongoose.model('Category', CategorySchema);
 
@@ -52,4 +52,4 @@ class CategoryModel {
 
 const categoryModel = new CategoryModel();
 
-module.exports = categoryModel;
+export default categoryModel;

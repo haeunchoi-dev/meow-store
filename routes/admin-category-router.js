@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const { adminRequired } = require('../middlewares');
-const categoryController = require('../controllers/category-controller');
+import { Router } from 'express';
+import { adminRequired } from '../middlewares';
+import categoryController from '../controllers/category-controller';
 const adminCategoryRouter = Router();
 
 adminCategoryRouter.post('/', adminRequired, categoryController.createCategory);
@@ -17,4 +17,4 @@ adminCategoryRouter.put(
 );
 // adminCategoryRouter.patch('/', categoryController.deleteLowCategory);
 
-module.exports = adminCategoryRouter;
+export { adminCategoryRouter };

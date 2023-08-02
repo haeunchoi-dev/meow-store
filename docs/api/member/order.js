@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/api/member/order': {
     post: {
       tags: ['Member Order'],

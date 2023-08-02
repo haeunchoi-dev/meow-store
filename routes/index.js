@@ -1,23 +1,10 @@
-const productsRouter = require('./products-router');
-const productRouter = require('./product-router');
-const memberOrderRouter = require('./member-order-router');
-const memberOrdersRouter = require('./member-orders-router');
-const adminProductRouter = require('./admin-product-router');
-const adminCategoryRouter = require('./admin-category-router');
-const adminSubCategoryRouter = require('./admin-sub-category-router');
-const adminOrderRouter = require('./admin-order-router');
-const adminOrdersRouter = require('./admin-orders-router');
-const userRouter = require('./user-router');
-
-module.exports = {
-  productsRouter,
-  productRouter,
-  memberOrderRouter,
-  memberOrdersRouter,
-  adminProductRouter,
-  adminCategoryRouter,
-  adminOrderRouter,
-  adminOrdersRouter,
-  adminSubCategoryRouter,
-  userRouter,
-};
+export * from './products-router';
+export * from './product-router';
+export * from './member-order-router';
+export * from './member-orders-router';
+export * from './admin-product-router';
+export * from './admin-category-router';
+export * from './admin-sub-category-router';
+export * from './admin-order-router';
+export * from './admin-orders-router';
+export * from './user-router';

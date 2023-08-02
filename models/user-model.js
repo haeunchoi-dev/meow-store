@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const UserSchema = require('./schemas/user');
+import mongoose from 'mongoose';
+import UserSchema from './schemas/user';
 
 const User = mongoose.model('users', UserSchema);
 
@@ -36,4 +36,4 @@ class UserModel {
 
 const userModel = new UserModel();
 
-module.exports = userModel;
+export default userModel;

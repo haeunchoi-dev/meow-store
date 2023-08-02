@@ -1,8 +1,8 @@
-const { Router } = require('express');
-const { loginRequired } = require('../middlewares');
-const orderController = require('../controllers/order-controller');
+import { Router } from 'express';
+import { loginRequired } from '../middlewares';
+import orderController from '../controllers/order-controller';
 const memberOrdersRouter = Router();
 
 memberOrdersRouter.get('/', loginRequired, orderController.getOrderList);
 
-module.exports = memberOrdersRouter;
+export { memberOrdersRouter };

@@ -1,7 +1,4 @@
-const adminRequired = require('./admin-required');
-const loginRequired = require('./login-required');
+import adminRequired from './admin-required';
+import loginRequired from './login-required';
 
-module.exports = {
-  adminRequired,
-  loginRequired,
-};
+export { adminRequired, loginRequired };

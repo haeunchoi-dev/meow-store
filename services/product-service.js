@@ -1,4 +1,4 @@
-const Product = require('../models/product-model');
+import Product from '../models/product-model';
 
 class ProductsService {
   async getProductList(option) {
@@ -32,4 +32,4 @@ class ProductsService {
 }
 
 const productsService = new ProductsService();
-module.exports = productsService;
+export default productsService;

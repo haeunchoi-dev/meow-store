@@ -11,17 +11,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="/common/global.css" />
-    <link rel="stylesheet" href="/components/category-modal.css" />
-    <script defer src="/components/admin-header.js"></script>
-    <script defer src="/components/footer.js"></script>
+    <script type="module" src="/components/AdminHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="index.css" />
     <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
 
   <body>
-    <header class="header"></header>
+    <admin-header></admin-header>
 
     <!-- 메인 -->
     <main>
@@ -31,13 +29,7 @@
         <div class="product_wrap">
           <div class="product_left">카테고리</div>
           <div class="product_right">
-            <button
-              class="button is-warning js-modal-trigger is-small"
-              data-target="modal-category"
-              data-callback="callbackCategoryModal"
-            >
-              카테고리 찾기
-            </button>
+            <div id="categoryModal"></div>
             <b class="category-name" id="categoryName"></b>
             <input type="hidden" id="categoryId" />
             <input type="hidden" id="subcategoryId" />
@@ -112,8 +104,6 @@
       </div>
     </main>
 
-    <div class="modal" id="modal-category"></div>
-
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>

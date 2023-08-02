@@ -4,17 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="/common/global.css" />
+    <script type="module" src="/components/CommonHeader.js"></script>
+    <script type="module" src="/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <script defer src="/components/header.js"></script>
-    <script defer src="/components/footer.js"></script>
     <script defer type="module" src="index.js"></script>
     <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>야옹 잡화점</title>
   </head>
   
   <body>
-    <header class="header"></header>
+    <common-header></common-header>
 
     <main>
       <section>
@@ -70,7 +69,7 @@
       </section>
     </main>
 
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
     
   </body>
 </html>

@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { getSecretKey } = require('../jwt/secret-key');
+import jwt from 'jsonwebtoken';
+import { getSecretKey } from '../jwt/secret-key';
 
 function adminRequired(req, res, next) {
   const userToken =
@@ -43,4 +43,4 @@ function adminRequired(req, res, next) {
   }
 }
 
-module.exports = adminRequired;
+export default adminRequired;

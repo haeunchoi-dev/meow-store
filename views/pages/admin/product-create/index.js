@@ -1,9 +1,9 @@
 import { blockIfNotAdmin, isNull } from '/utils/index.js';
 blockIfNotAdmin();
 import * as API from '/api/index.js';
+import '/components/CategoryModal.js';
 
-import categoryModal from '/components/category-modal.js';
-window.callbackCategoryModal = function (result) {
+const callbackCategoryModal = function (result) {
   console.log(result);
   const categoryName = document.getElementById('categoryName');
   const categoryId = document.getElementById('categoryId');
@@ -13,7 +13,9 @@ window.callbackCategoryModal = function (result) {
   categoryId.value = result.categoryId;
   subcategoryId.value = result.subcategoryId ? result.subcategoryId : '';
 };
-categoryModal();
+const CategoryModal = document.createElement('category-modal');
+CategoryModal.modalCallback = callbackCategoryModal;
+document.getElementById('categoryModal').appendChild(CategoryModal);
 
 const fileInput = document.getElementById('fileInput'); // 파일을 선택하는 input 요소
 const uploadButton = document.getElementById('uploadButton'); // 업로드 버튼
