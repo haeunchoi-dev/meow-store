@@ -2,11 +2,7 @@ export default {
   '/api/member/orders': {
     get: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '사용자별 구매 내역 조회',
       description: '사용자별 구매 내역 조회',
       responses: {

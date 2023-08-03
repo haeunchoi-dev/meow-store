@@ -2,11 +2,7 @@ export default {
   '/api/member/order': {
     post: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '주문 진행',
       description: '주문 진행',
       requestBody: {
@@ -102,11 +98,7 @@ export default {
   '/api/member/order/{id}': {
     get: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '사용자별 구매 내역 상세 조회',
       description: '사용자별 구매 내역 상세 조회',
       parameters: [
@@ -215,11 +207,7 @@ export default {
     },
     post: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '사용자별 주문 전체취소',
       description: '사용자별 주문 전체취소',
       parameters: [
@@ -246,11 +234,7 @@ export default {
   '/api/member/order/{id}/info': {
     post: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '사용자별 주문 상세 (사용자 정보) 수정',
       description: '사용자별 주문 상세 (사용자 정보) 수정',
       parameters: [
@@ -318,11 +302,7 @@ export default {
   '/api/member/order/{id}/products': {
     delete: {
       tags: ['Member Order'],
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       summary: '사용자별 주문 상세 (상품) 삭제',
       description: '사용자별 주문 상세 (상품) 삭제',
       parameters: [

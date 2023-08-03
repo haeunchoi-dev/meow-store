@@ -4,11 +4,7 @@ export default {
       tags: ['User'],
       summary: '사용자 정보 조회',
       description: '사용자 정보 조회',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       responses: {
         200: {
           description: '사용자 정보 수정 완료.',
@@ -73,11 +69,7 @@ export default {
       tags: ['User'],
       summary: '사용자 정보 수정',
       description: '사용자 정보 수정',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       requestBody: {
         content: {
           'application/json': {
@@ -142,11 +134,7 @@ export default {
       tags: ['User'],
       summary: '회원탈퇴',
       description: '회원탈퇴',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       responses: {
         200: {
           description: '회원탈퇴 완료',
@@ -162,11 +150,7 @@ export default {
       tags: ['User'],
       summary: 'Admin 사용자 정보 조회',
       description: 'Admin 사용자 정보 조회',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       parameters: [
         {
           name: 'userId',
@@ -242,11 +226,7 @@ export default {
       tags: ['User'],
       summary: 'Admin 사용자 정보 수정',
       description: 'Admin 사용자 정보 수정',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       parameters: [
         {
           name: 'userId',
@@ -322,11 +302,7 @@ export default {
       tags: ['User'],
       summary: 'Admin 회원탈퇴',
       description: 'Admin 회원탈퇴',
-      security: [
-        {
-          bearerAuth: [],
-        },
-      ],
+
       parameters: [
         {
           name: 'userId',
