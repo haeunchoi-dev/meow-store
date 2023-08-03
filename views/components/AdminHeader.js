@@ -1,4 +1,4 @@
-import { getCookie } from '/utils/index.js';
+import { getCookie } from '/views/utils/index.js';
 class AdminHeader extends HTMLElement {
   constructor() {
     super();
@@ -177,7 +177,7 @@ class AdminHeader extends HTMLElement {
         <div class="logo">
         <div class="img-box">
             <a href ='/admin/product/'>
-                <img src="http://${location.host}/assets/로고.png" alt="로고">
+                <img src="http://${location.host}/views/assets/로고.png" alt="로고">
             </a>
         </div>
         <div class="span-container">

@@ -1,4 +1,8 @@
-import { getUrlParams, validateEmail, blockIfLogin } from '/utils/index.js';
+import {
+  getUrlParams,
+  validateEmail,
+  blockIfLogin,
+} from '/views/utils/index.js';
 blockIfLogin();
 const email = document.getElementById('email');
 const password = document.getElementById('password');

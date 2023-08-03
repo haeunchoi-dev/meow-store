@@ -1,5 +1,5 @@
-import { addLoadingBar } from '/components/LoadingBar.js';
-import * as API from '/api/index.js';
+import { addLoadingBar } from '/views/components/LoadingBar.js';
+import * as API from '/views/api/index.js';
 
 export const blockIfLogin = () => {
   const token = getCookie('loginToken');

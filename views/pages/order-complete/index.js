@@ -1,4 +1,4 @@
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');

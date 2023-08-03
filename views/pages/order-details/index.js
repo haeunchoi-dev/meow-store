@@ -1,6 +1,6 @@
-import { blockIfNotLogin, isNull } from '/utils/index.js';
+import { blockIfNotLogin, isNull } from '/views/utils/index.js';
 blockIfNotLogin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 
 const urlParams = new URLSearchParams(window.location.search); // http://localhost:3000/product-details/?id=64a8b5c760e6ded9c555e247
 const id = urlParams.get('id');

@@ -1,4 +1,7 @@
-import { addLoadingBar, removeLoadingBar } from '/components/LoadingBar.js';
+import {
+  addLoadingBar,
+  removeLoadingBar,
+} from '/views/components/LoadingBar.js';
 
 async function get(endpoint, params = '', isLoading = false) {
   const apiUrl = `${endpoint}${params}`;

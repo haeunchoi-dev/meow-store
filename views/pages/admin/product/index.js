@@ -1,6 +1,6 @@
-import { blockIfNotAdmin } from '/utils/index.js';
+import { blockIfNotAdmin } from '/views/utils/index.js';
 blockIfNotAdmin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 
 const count = document.querySelector('.b2');
 

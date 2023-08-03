@@ -1,7 +1,7 @@
-import { blockIfNotAdmin, isNull } from '/utils/index.js';
+import { blockIfNotAdmin, isNull } from '/views/utils/index.js';
 blockIfNotAdmin();
-import * as API from '/api/index.js';
-import '/components/CategoryModal.js';
+import * as API from '/views/api/index.js';
+import '/views/components/CategoryModal.js';
 
 const callbackCategoryModal = function (result) {
   console.log(result);

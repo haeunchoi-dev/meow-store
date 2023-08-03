@@ -1,5 +1,5 @@
-import { getCookie } from '/utils/index.js';
-import { put } from '/api/index.js';
+import { getCookie } from '/views/utils/index.js';
+import { put } from '/views/api/index.js';
 class CommonHeader extends HTMLElement {
   constructor() {
     super();
@@ -201,7 +201,7 @@ class CommonHeader extends HTMLElement {
             <div class="logo">
             <div class="img-box">
                 <a href ='/'>
-                  <img src="http://${location.host}/assets/로고.png" alt="로고">
+                  <img src="http://${location.host}/views/assets/로고.png" alt="로고">
                 </a>
             </div>
             <div class="span-container">

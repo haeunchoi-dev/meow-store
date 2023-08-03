@@ -1,5 +1,5 @@
-import { isNull } from '/utils/index.js';
-import * as API from '/api/index.js';
+import { isNull } from '/views/utils/index.js';
+import * as API from '/views/api/index.js';
 
 const receiverInput = document.querySelector('#receiver');
 const contactInput = document.querySelector('#contact');

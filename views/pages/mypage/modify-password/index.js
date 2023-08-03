@@ -1,6 +1,6 @@
-import { blockIfNotLogin } from '/utils/index.js';
+import { blockIfNotLogin } from '/views/utils/index.js';
 blockIfNotLogin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 const password = document.querySelector('#password');
 const newPassword = document.querySelector('#new-password');
 const checkPassword = document.querySelector('#new-password-check');

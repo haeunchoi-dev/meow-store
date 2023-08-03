@@ -40,15 +40,7 @@ app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
 app.use('/api/user', userRouter);
 
-app.use('/assets', express.static(path.join(__dirname, 'views/assets')));
-app.use(
-  '/components',
-  express.static(path.join(__dirname, 'views/components')),
-);
-app.use('/utils', express.static(path.join(__dirname, 'views/utils')));
-app.use('/common', express.static(path.join(__dirname, 'views/common')));
-app.use('/uploads', express.static(path.join(__dirname, 'views/uploads')));
-app.use('/api', express.static(path.join(__dirname, 'views/api')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 app.use('/', express.static(path.join(__dirname, 'views/pages')));
 
 //swagger 적용

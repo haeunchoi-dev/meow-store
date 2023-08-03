@@ -37,9 +37,9 @@ class ProductController {
 
   async createProduct(req, res) {
     try {
-      let repImgUrl = '/assets/not-image.png';
+      let repImgUrl = '/views/assets/not-image.png';
       if (req.file) {
-        repImgUrl = '/uploads/' + req.file?.filename;
+        repImgUrl = '/views/uploads/' + req.file?.filename;
       }
 
       const product = await ProductService.createProduct({
@@ -62,9 +62,9 @@ class ProductController {
       const { id } = req.params;
       let repImgUrl = req.body.prevImgUrl
         ? req.body.prevImgUrl
-        : '/assets/not-image.png';
+        : '/views/assets/not-image.png';
       if (req.file) {
-        repImgUrl = '/uploads/' + req.file?.filename;
+        repImgUrl = '/views/uploads/' + req.file?.filename;
       }
       if (
         req.body.subcategoryId === '' ||
