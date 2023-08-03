@@ -23,4 +23,7 @@ userRouter.get('/mypage', loginRequired, userController.getUser);
 userRouter.post('/mypage', loginRequired, userController.updateUser);
 userRouter.delete('/mypage', loginRequired, userController.deleteUser);
 
+userRouter.get('/auth/check', loginRequired, userController.checkAuth);
+userRouter.get('/admin/check', adminRequired, userController.checkAdmin);
+
 export { userRouter };
