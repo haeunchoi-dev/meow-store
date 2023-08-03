@@ -20,7 +20,7 @@ class UserController {
         .cookie('loginToken', user.token)
         .cookie('isAdmin', user.isAdmin)
         .status(200)
-        .json(user);
+        .json({});
     } catch (error) {
       res
         .status(error.status || 500)
@@ -104,6 +104,26 @@ class UserController {
       //TODO: 유저삭제시 관련 데이터 지우기
       await UserService.deleteUser(userId);
       res.status(204).end();
+    } catch (error) {
+      res
+        .status(error.status || 500)
+        .json({ success: false, message: error.message });
+    }
+  }
+
+  async checkAuth(req, res) {
+    try {
+      res.status(200).json({ result: 'success' });
+    } catch (error) {
+      res
+        .status(error.status || 500)
+        .json({ success: false, message: error.message });
+    }
+  }
+
+  async checkAdmin(req, res) {
+    try {
+      res.status(200).json({ result: 'success' });
     } catch (error) {
       res
         .status(error.status || 500)
