@@ -84,15 +84,15 @@ section.content-wrap {
   height: 100px;
 }
 .content i.member-icon {
-  background: url('../../assets/icon-admin.png');
+  background: url('/assets/icon-admin.png');
   background-size: cover;
 }
 .content i.ask-icon {
-  background: url('../../assets/ask.png');
+  background: url('/assets/ask.png');
   background-size: cover;
 }
 .content i.order-icon {
-  background: url('../../assets/orderList.png');
+  background: url('/assets/orderList.png');
   background-size: cover;
 }
 
