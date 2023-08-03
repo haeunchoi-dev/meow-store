@@ -5,19 +5,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { generateSecretKey } from './jwt/secret-key';
 import connectDB from './config/db';
-import {
-  memberOrderRouter,
-  memberOrdersRouter,
-  adminProductRouter,
-  adminCategoryRouter,
-  adminSubCategoryRouter,
-  productRouter,
-  productsRouter,
-  adminOrderRouter,
-  adminOrdersRouter,
-  userRouter,
-} from './routes';
-import ApiDcos from './docs/index';
+import apiRouter from './routes';
+import { getSwaggerOption } from './utils/swagger-option';
 
 connectDB();
 
@@ -29,27 +18,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/products', productsRouter);
-app.use('/api/product', productRouter);
-app.use('/api/member/order', memberOrderRouter);
-app.use('/api/member/orders', memberOrdersRouter);
-app.use('/api/admin/product', adminProductRouter);
-app.use('/api/admin/category', adminCategoryRouter);
-app.use('/api/admin/subcategory', adminSubCategoryRouter);
-app.use('/api/admin/order', adminOrderRouter);
-app.use('/api/admin/orders', adminOrdersRouter);
-app.use('/api/user', userRouter);
+app.use('/api', apiRouter);
 
 app.use('/views', express.static(path.join(__dirname, 'views')));
 app.use('/', express.static(path.join(__dirname, 'views/pages')));
 
 //swagger 적용
-function getSwaggerOption() {
-  const apiDocs = new ApiDcos();
-  apiDocs.init();
-
-  return apiDocs.getSwaggerOption();
-}
 const { swaggerUI, specs, setUpoption } = getSwaggerOption();
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, setUpoption));
 

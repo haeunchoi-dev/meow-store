@@ -1,23 +1,25 @@
 import { Router } from 'express';
 import { adminRequired } from '../middlewares';
 import subCategoryController from '../controllers/sub-category-controller';
-const adminSubCategoryRouter = Router();
+const subCategoryRouter = Router();
 
-adminSubCategoryRouter.post(
-  '/',
+const baseUrl = '/admin/subcategory';
+
+subCategoryRouter.post(
+  `${baseUrl}`,
   adminRequired,
   subCategoryController.createSubCategory,
 );
-adminSubCategoryRouter.get('/', subCategoryController.getSubCategoryList);
-adminSubCategoryRouter.delete(
-  '/:id',
+subCategoryRouter.get(`${baseUrl}`, subCategoryController.getSubCategoryList);
+subCategoryRouter.delete(
+  `${baseUrl}/:id`,
   adminRequired,
   subCategoryController.removeSubCategory,
 );
-adminSubCategoryRouter.put(
-  '/:id',
+subCategoryRouter.put(
+  `${baseUrl}/:id`,
   adminRequired,
   subCategoryController.modifySubCategory,
 );
 
-export { adminSubCategoryRouter };
+export default subCategoryRouter;

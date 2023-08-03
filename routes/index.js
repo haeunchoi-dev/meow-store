@@ -1,10 +1,17 @@
-export * from './products-router';
-export * from './product-router';
-export * from './member-order-router';
-export * from './member-orders-router';
-export * from './admin-product-router';
-export * from './admin-category-router';
-export * from './admin-sub-category-router';
-export * from './admin-order-router';
-export * from './admin-orders-router';
-export * from './user-router';
+import { Router } from 'express';
+
+import productRouter from './product-router';
+import orderRouter from './order-router';
+import categoryRouter from './category-router';
+import categorySubRouter from './category-sub-router';
+import userRouter from './user-router';
+
+const apiRouter = Router();
+
+apiRouter.use(productRouter);
+apiRouter.use(orderRouter);
+apiRouter.use(categoryRouter);
+apiRouter.use(categorySubRouter);
+apiRouter.use(userRouter);
+
+export default apiRouter;

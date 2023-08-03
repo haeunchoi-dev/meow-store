@@ -3,27 +3,40 @@ import { adminRequired, loginRequired } from '../middlewares';
 import userController from '../controllers/user-controller';
 const userRouter = Router();
 
-userRouter.post('/register', userController.register);
-userRouter.post('/login', userController.login);
-userRouter.put('/logout', userController.logout);
-
-userRouter.get('/mypage/:userId', adminRequired, userController.getUserByAdmin); //TODO: admin 사용자가 다른 사용자정보 조회가능
+const userMypageBaseUrl = '/user/mypage';
+userRouter.get(
+  `${userMypageBaseUrl}/:userId`,
+  adminRequired,
+  userController.getUserByAdmin,
+); //TODO: admin 사용자가 다른 사용자정보 조회가능
 userRouter.post(
-  '/mypage/:userId',
+  `${userMypageBaseUrl}/:userId`,
   adminRequired,
   userController.updateUserByAdmin,
 ); //TODO: admin 사용자가 다른 사용자 업데이트 가능
 userRouter.delete(
-  '/mypage/:userId',
+  `${userMypageBaseUrl}/:userId`,
   adminRequired,
   userController.deleteUserByAdmin,
 ); //TODO: admin 사용자가 다른 사용자 탈퇴가능
 
-userRouter.get('/mypage', loginRequired, userController.getUser);
-userRouter.post('/mypage', loginRequired, userController.updateUser);
-userRouter.delete('/mypage', loginRequired, userController.deleteUser);
+userRouter.get(`${userMypageBaseUrl}`, loginRequired, userController.getUser);
+userRouter.post(
+  `${userMypageBaseUrl}`,
+  loginRequired,
+  userController.updateUser,
+);
+userRouter.delete(
+  `${userMypageBaseUrl}`,
+  loginRequired,
+  userController.deleteUser,
+);
 
-userRouter.get('/auth/check', loginRequired, userController.checkAuth);
-userRouter.get('/admin/check', adminRequired, userController.checkAdmin);
+userRouter.post('/user/register', userController.register);
+userRouter.post('/user/login', userController.login);
+userRouter.put('/user/logout', userController.logout);
 
-export { userRouter };
+userRouter.get('/user/auth/check', loginRequired, userController.checkAuth);
+userRouter.get('/user/admin/check', adminRequired, userController.checkAdmin);
+
+export default userRouter;
