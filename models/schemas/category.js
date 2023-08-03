@@ -5,7 +5,7 @@ const categorySchema = new Schema(
     //name, id, title 등
     categoryName: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   {
