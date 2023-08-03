@@ -3,7 +3,7 @@ import categoriesService from '../services/category-service';
 
 class SubCategoryController {
   // 하위 카테고리 생성
-  async createSubCategory(req, res) {
+  async createSubCategory(req, res, next) {
     try {
       const { categoryId, subCategoryName } = req.body;
       const category = await SubCategoriesService.findSubCategory({
@@ -20,14 +20,12 @@ class SubCategoryController {
         subCategoryName,
       });
       res.status(201).json({ success: true, data: subCategory });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   // 카테고리 전체 조회
-  async getSubCategoryList(req, res) {
+  async getSubCategoryList(req, res, next) {
     try {
       //   const result = await SubCategoriesService.getSubCategoryList();
       const result = await categoriesService.getCategoryList();
@@ -39,14 +37,12 @@ class SubCategoryController {
       });
       const processedResult = await Promise.all(categoriesWithSubcategories);
       res.status(201).json({ success: true, data: processedResult });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   // 하위 카테고리 수정
-  async modifySubCategory(req, res) {
+  async modifySubCategory(req, res, next) {
     try {
       const { id } = req.params;
       const { subCategoryName } = req.body;
@@ -63,22 +59,18 @@ class SubCategoryController {
       category.subCategoryName = subCategoryName;
       const result = await category.save();
       res.status(201).json({ success: true, data: result });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   // 하위 카테고리 삭제
-  async removeSubCategory(req, res) {
+  async removeSubCategory(req, res, next) {
     try {
       const { id } = req.params;
       const result = await SubCategoriesService.deleteOne({ _id: id });
       res.status(201).json({ success: true, data: result });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 }

@@ -1,7 +1,7 @@
 import ProductService from '../services/product-service';
 
 class ProductController {
-  async getProducts(req, res) {
+  async getProducts(req, res, next) {
     try {
       const { categoryId, subcategoryId } = req.query;
 
@@ -15,27 +15,23 @@ class ProductController {
 
       const products = await ProductService.getProductList(option);
       res.status(200).json(products);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
-  async getProduct(req, res) {
+  async getProduct(req, res, next) {
     try {
       const { id } = req.params;
 
       const products = await ProductService.getProductById(id);
       res.status(200).json(products);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
-  async createProduct(req, res) {
+  async createProduct(req, res, next) {
     try {
       let repImgUrl = '/views/assets/not-image.png';
       if (req.file) {
@@ -49,10 +45,8 @@ class ProductController {
       });
 
       res.status(201).json({ success: true, data: product });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -78,10 +72,8 @@ class ProductController {
         repImgUrl,
       });
       res.status(200).json(updatedProduct);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async deleteProduct(req, res, next) {
@@ -89,10 +81,8 @@ class ProductController {
       const { id } = req.params;
       const result = await ProductService.deleteProduct(id);
       res.status(200).json(result);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 }

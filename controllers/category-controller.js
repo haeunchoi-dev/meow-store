@@ -3,7 +3,7 @@ import categoriesService from '../services/category-service';
 import subCategoryService from '../services/sub-category-service';
 
 class CategoryController {
-  async createCategory(req, res) {
+  async createCategory(req, res, next) {
     //카테고리 생성
     try {
       const { categoryName } = req.body;
@@ -21,25 +21,21 @@ class CategoryController {
         categoryName,
       });
       res.status(201).json({ success: true, data: category });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
-  async getCategories(req, res) {
+  async getCategories(req, res, next) {
     try {
       const categories = await CategoriesService.getCategoryList();
       res.status(200).json(categories);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   // 상위 카테고리 삭제
-  async removeCategory(req, res) {
+  async removeCategory(req, res, next) {
     try {
       const { id } = req.params;
       const deleteSubcategories = await subCategoryService.deleteMany({
@@ -49,14 +45,12 @@ class CategoryController {
       res
         .status(201)
         .json({ success: true, data: result, deleteSubcategories });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   // 상위 카테고리 수정
-  async modifyCategory(req, res) {
+  async modifyCategory(req, res, next) {
     try {
       const { id } = req.params;
       const { categoryName } = req.body;
@@ -74,10 +68,8 @@ class CategoryController {
         categoryName,
       });
       res.status(201).json({ success: true, data: result });
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 }

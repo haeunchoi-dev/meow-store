@@ -5,10 +5,8 @@ class OrderController {
     try {
       const order = await OrderService.createOrder(req.body, req.currentUserId);
       res.status(200).json(order._id);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async getOrder(req, res, next) {
@@ -17,10 +15,8 @@ class OrderController {
 
       const order = await OrderService.getOrderById(id);
       res.status(200).json(order);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async cancelOrder(req, res, next) {
@@ -28,10 +24,8 @@ class OrderController {
       const { id } = req.params;
       const result = await OrderService.cancelOrder(id);
       res.status(200).json(result);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async editOrderInfo(req, res, next) {
@@ -39,10 +33,8 @@ class OrderController {
       const { id } = req.params;
       const updatedOrder = await OrderService.editOrderInfo(id, req.body);
       res.status(200).json(updatedOrder);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async removeOrderProducts(req, res, next) {
@@ -53,20 +45,16 @@ class OrderController {
         req.body.orderItemIds,
       );
       res.status(200).json(result);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
   async getOrderList(req, res, next) {
     try {
       const orders = await OrderService.getOrderList(req.currentUserId);
       res.status(200).json(orders);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -74,10 +62,8 @@ class OrderController {
     try {
       const orders = await OrderService.getAdminOrderList();
       res.status(200).json(orders);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -86,10 +72,8 @@ class OrderController {
       const { id } = req.params;
       const updatedOrder = await OrderService.editOrderState(id, req.body);
       res.status(200).json(updatedOrder);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -98,10 +82,8 @@ class OrderController {
       const { id } = req.params;
       const result = await OrderService.removeOrder(id);
       res.status(200).json(result);
-    } catch (err) {
-      res
-        .status(err.statusCode || 500)
-        .json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 }

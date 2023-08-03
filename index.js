@@ -27,6 +27,16 @@ app.use('/', express.static(path.join(__dirname, 'views/pages')));
 const { swaggerUI, specs, setUpoption } = getSwaggerOption();
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, setUpoption));
 
+app.use((req, res, next) => {
+  res.status(404).redirect('/not-found');
+});
+
+//error
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500);
+  res.json({ success: false, status: err.status, message: err.message });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
