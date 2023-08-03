@@ -1,42 +1,55 @@
 import { Router } from 'express';
-import { adminRequired, loginRequired } from '../middlewares';
+import { adminRequired, loginRequired, errorHandler } from '../middlewares';
 import userController from '../controllers/user-controller';
+
 const userRouter = Router();
 
 const userMypageBaseUrl = '/user/mypage';
 userRouter.get(
   `${userMypageBaseUrl}/:userId`,
   adminRequired,
-  userController.getUserByAdmin,
+  errorHandler(userController.getUserByAdmin),
 ); //TODO: admin 사용자가 다른 사용자정보 조회가능
 userRouter.post(
   `${userMypageBaseUrl}/:userId`,
   adminRequired,
-  userController.updateUserByAdmin,
+  errorHandler(userController.updateUserByAdmin),
 ); //TODO: admin 사용자가 다른 사용자 업데이트 가능
 userRouter.delete(
   `${userMypageBaseUrl}/:userId`,
   adminRequired,
-  userController.deleteUserByAdmin,
+  errorHandler(userController.deleteUserByAdmin),
 ); //TODO: admin 사용자가 다른 사용자 탈퇴가능
 
-userRouter.get(`${userMypageBaseUrl}`, loginRequired, userController.getUser);
+userRouter.get(
+  `${userMypageBaseUrl}`,
+  loginRequired,
+  errorHandler(userController.getUser),
+);
 userRouter.post(
   `${userMypageBaseUrl}`,
   loginRequired,
-  userController.updateUser,
+  errorHandler(userController.updateUser),
 );
 userRouter.delete(
   `${userMypageBaseUrl}`,
   loginRequired,
-  userController.deleteUser,
+  errorHandler(userController.deleteUser),
 );
 
-userRouter.post('/user/register', userController.register);
-userRouter.post('/user/login', userController.login);
-userRouter.put('/user/logout', userController.logout);
+userRouter.post('/user/register', errorHandler(userController.register));
+userRouter.post('/user/login', errorHandler(userController.login));
+userRouter.put('/user/logout', errorHandler(userController.logout));
 
-userRouter.get('/user/auth/check', loginRequired, userController.checkAuth);
-userRouter.get('/user/admin/check', adminRequired, userController.checkAdmin);
+userRouter.get(
+  '/user/auth/check',
+  loginRequired,
+  errorHandler(userController.checkAuth),
+);
+userRouter.get(
+  '/user/admin/check',
+  adminRequired,
+  errorHandler(userController.checkAdmin),
+);
 
 export default userRouter;

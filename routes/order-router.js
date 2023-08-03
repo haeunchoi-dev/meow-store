@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { loginRequired, adminRequired } from '../middlewares';
+import { loginRequired, adminRequired, errorHandler } from '../middlewares';
 import orderController from '../controllers/order-controller';
+
 const orderRouter = Router();
 
 const memberBaseUrl = '/member/order';
@@ -8,45 +9,49 @@ const memberBaseUrl = '/member/order';
 orderRouter.post(
   `${memberBaseUrl}`,
   loginRequired,
-  orderController.createOrder,
+  errorHandler(orderController.createOrder),
 );
 orderRouter.get(
   `${memberBaseUrl}/:id`,
   loginRequired,
-  orderController.getOrder,
+  errorHandler(orderController.getOrder),
 );
 orderRouter.post(
   `${memberBaseUrl}/:id`,
   loginRequired,
-  orderController.cancelOrder,
+  errorHandler(orderController.cancelOrder),
 );
 orderRouter.post(
   `${memberBaseUrl}/:id/info`,
   loginRequired,
-  orderController.editOrderInfo,
+  errorHandler(orderController.editOrderInfo),
 );
 orderRouter.delete(
   `${memberBaseUrl}/:id/products`,
   loginRequired,
-  orderController.removeOrderProducts,
+  errorHandler(orderController.removeOrderProducts),
 );
-orderRouter.get('/member/orders', loginRequired, orderController.getOrderList);
+orderRouter.get(
+  '/member/orders',
+  loginRequired,
+  errorHandler(orderController.getOrderList),
+);
 
 const adminBaseUrl = '/admin/order';
 orderRouter.post(
   `${adminBaseUrl}/:id`,
   adminRequired,
-  orderController.editOrderState,
+  errorHandler(orderController.editOrderState),
 );
 orderRouter.delete(
   `${adminBaseUrl}/:id`,
   adminRequired,
-  orderController.removeOrder,
+  errorHandler(orderController.removeOrder),
 );
 orderRouter.get(
   '/admin/orders',
   adminRequired,
-  orderController.getAdminOrderList,
+  errorHandler(orderController.getAdminOrderList),
 );
 
 export default orderRouter;
