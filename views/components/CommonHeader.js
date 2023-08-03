@@ -240,7 +240,7 @@ class CommonHeader extends HTMLElement {
       login.textContent = '로그아웃';
       mypage.style.display = 'inline-block';
     }
-    if (admin) {
+    if (admin === 'true') {
       adminHome.style.display = 'inline-block';
     }
 

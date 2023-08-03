@@ -207,7 +207,7 @@ class AdminHeader extends HTMLElement {
     const userHome = self.shadow.querySelector('.user-home');
     const mainNav = self.shadow.querySelector('.mainNav');
 
-    if (admin) {
+    if (admin === 'true') {
       userHome.style.display = 'inline-block';
       userHome.addEventListener('click', function () {
         window.location.href = '/';
