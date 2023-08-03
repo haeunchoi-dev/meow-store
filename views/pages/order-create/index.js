@@ -1,5 +1,6 @@
 import { isNull } from '/views/utils/index.js';
 import * as API from '/views/api/index.js';
+import Cart from '/views/store/cart.js';
 
 const receiverInput = document.querySelector('#receiver');
 const contactInput = document.querySelector('#contact');
@@ -26,7 +27,7 @@ async function getUserInfo() {
 }
 getUserInfo();
 
-let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
+let savedCartData = Cart.selectAll();
 let priceSum = 0;
 let dataToPost = {
   receiver: '',

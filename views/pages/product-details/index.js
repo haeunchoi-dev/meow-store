@@ -1,3 +1,4 @@
+import Cart from '/views/store/cart.js';
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 const infoBox = document.querySelector('#info_box');
@@ -14,8 +15,9 @@ async function getProductData(id) {
     productData.qty = 1;
 
     let subCategory = '';
-    if (productData.subcategoryId) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
-      infoBox.innerHTML = `
+    if (productData.subcategoryId)
+      subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
+    infoBox.innerHTML = `
       <p class="product_category">${
         productData.categoryId.categoryName
       }${subCategory}</p>
@@ -35,7 +37,9 @@ async function getProductData(id) {
     thumbnail.src = `${productData.repImgUrl}`;
 
     document.querySelector('#cart_button').addEventListener('click', addToCart);
-    document.querySelector('#order_button').addEventListener('click', addToCart);
+    document
+      .querySelector('#order_button')
+      .addEventListener('click', addToCart);
   } catch (err) {
     console.log(err);
   }
@@ -44,43 +48,30 @@ async function getProductData(id) {
 getProductData(id);
 
 function addToCart() {
-  if (localStorage.getItem('meowStoreCart') === null) {
-    localStorage.setItem('meowStoreCart', JSON.stringify([productData]));
-    alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+  if (Cart.count({}) === 0) {
+    Cart.insert(productData, () => {
+      alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+    });
+
     return;
   }
+  const findData = Cart.findById(productData._id);
+  console.log(findData);
 
-  // 로컬스토리지에 meowStoreCart가 있다면, 이 상품이 들어가있는지 체크
-  let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart'));
-
-  const isAlreadyIn = () => {
-    let bool = false;
-    const count = savedCartData.length;
-    for (let i = 0; i < count; ++i) {
-      const currentCartData = savedCartData[i];
-      if (productData._id === currentCartData._id) {
-        bool = true;
-        break;
-      }
-    }
-    return bool;
-  };
-
-  if (isAlreadyIn()) {
+  if (findData) {
     const userConfirm = confirm(
       '이미 장바구니에 담겨진 상품입니다. 1개 더 추가하시겠습니까?',
     );
     if (userConfirm) {
-      savedCartData = savedCartData.map((o) => {
-        if (o._id === productData._id && o.qty < 9) o.qty += 1;
-        return o;
+      Cart.update({
+        id: productData._id,
+        qty: findData.qty < 9 ? findData.qty + 1 : findData.qty,
       });
-      localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
     }
     return;
   }
   // 이 상품이 장바구니에 담겨있지 않다면 추가
-  savedCartData.push(productData);
-  localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
-  alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+  Cart.insert(productData, () => {
+    alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+  });
 }

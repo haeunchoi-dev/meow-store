@@ -1,4 +1,5 @@
 import * as API from '/views/api/index.js';
+import Cart from '/views/store/cart.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
@@ -38,7 +39,7 @@ promise.then((data) => {
       </div>
     </li>
   `;
-  localStorage.removeItem('meowStoreCart');
+  Cart.removeAll();
 });
 
 const orderListBtn = document.querySelector('#to_order_list');
