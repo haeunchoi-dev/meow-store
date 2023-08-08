@@ -1,53 +1,25 @@
-//header에 nav추가
-document
-  .querySelector('common-header')
-  .shadowRoot.querySelector('header')
-  .insertAdjacentHTML(
-    'beforeend',
-    `<nav class = "mainNav">
-</nav>`,
-  );
+addAllElements();
 
-const mainNav = document
-  .querySelector('common-header')
-  .shadowRoot.querySelector('.mainNav');
-function clickNav(o, categoryId) {
-  const lis = mainNav.querySelectorAll('li');
-  lis.forEach((li) => {
-    li.classList.remove('active');
-    li.querySelector('.row-categorys')?.classList.remove('active');
-    li.querySelectorAll('.row-category')?.forEach((subCategory) => {
-      subCategory.classList.remove('active');
-    });
-  });
-  o.classList.add('active');
-  o.querySelector('.row-categorys')?.classList.add('active');
+async function addAllElements() {
+  document
+    .querySelector('common-header')
+    .shadowRoot.querySelector('header')
+    .insertAdjacentHTML(
+      'beforeend',
+      `<nav class = "mainNav">
+          </nav>`,
+    );
 
-  //main 요소에 list뿌려주기
-  getProductList(categoryId);
-}
-
-function clickSubNav(e, o, subcategoryId) {
-  // 이벤트 객체를 받아옴
-  if (e.stopPropagation) {
-    e.stopPropagation();
-  } else {
-    e.cancelBubble = true;
-  }
-
-  mainNav.querySelectorAll('.row-category')?.forEach((subCategory) => {
-    subCategory.classList.remove('active');
-  });
-  o.classList.add('active');
-
-  const categoryId = o.closest('li').getAttribute('id');
-  getProductList(categoryId, subcategoryId);
+  await getCategoryList();
 }
 
 async function getCategoryList() {
+  const mainNav = document
+    .querySelector('common-header')
+    .shadowRoot.querySelector('.mainNav');
+
   const result = await fetch('/api/admin/subcategory');
   const data = await result.json();
-  console.log(data);
 
   const categoryArr = data.data;
 
@@ -74,13 +46,47 @@ async function getCategoryList() {
     '',
   )}</ul>`;
 
-  //url이 '/' 일때 전체클릭
-  // if (window.location.pathname.trim() === '/') {
-  //   mainNav.querySelector('li').click();
-  // }
   mainNav.querySelector('li').click();
 }
-getCategoryList();
+
+function clickNav(o, categoryId) {
+  const mainNav = document
+    .querySelector('common-header')
+    .shadowRoot.querySelector('.mainNav');
+  const lis = mainNav.querySelectorAll('li');
+  lis.forEach((li) => {
+    li.classList.remove('active');
+    li.querySelector('.row-categorys')?.classList.remove('active');
+    li.querySelectorAll('.row-category')?.forEach((subCategory) => {
+      subCategory.classList.remove('active');
+    });
+  });
+  o.classList.add('active');
+  o.querySelector('.row-categorys')?.classList.add('active');
+
+  //main 요소에 list뿌려주기
+  getProductList(categoryId);
+}
+
+function clickSubNav(e, o, subcategoryId) {
+  const mainNav = document
+    .querySelector('common-header')
+    .shadowRoot.querySelector('.mainNav');
+  // 이벤트 객체를 받아옴
+  if (e.stopPropagation) {
+    e.stopPropagation();
+  } else {
+    e.cancelBubble = true;
+  }
+
+  mainNav.querySelectorAll('.row-category')?.forEach((subCategory) => {
+    subCategory.classList.remove('active');
+  });
+  o.classList.add('active');
+
+  const categoryId = o.closest('li').getAttribute('id');
+  getProductList(categoryId, subcategoryId);
+}
 
 async function getProductList(categoryId, subcategoryId = '') {
   let endpoint = '/api/products';
@@ -116,13 +122,6 @@ async function getProductList(categoryId, subcategoryId = '') {
 
   const itemBoxs = document.querySelector('.item-box');
   itemBoxs.innerHTML = itemElements.join('');
-
-  // const price = document.querySelectorAll('.price');
-  // price.forEach((itme) => {
-  //   itme.textContent = itme.textContent
-  //     .toString()
-  //     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-  // });
 }
 
 function redirectToProductDetails(itemId) {
