@@ -1,7 +1,7 @@
-import { blockIfNotAdmin, isNull } from '/utils/index.js';
+import { blockIfNotAdmin, isNull } from '/views/utils/index.js';
 blockIfNotAdmin();
-import * as API from '/api/index.js';
-import '/components/CategoryModal.js';
+import * as API from '/views/api/index.js';
+import '/views/components/CategoryModal.js';
 const callbackCategoryModal = function (result) {
   console.log(result);
   const categoryName = document.getElementById('categoryName');
@@ -45,7 +45,7 @@ async function getProductDetail() {
   stock.value = result.stock;
   summary.value = result.summary;
   description.value = result.description;
-  fileName.textContent = result.repImgUrl.split('/')[2];
+  fileName.textContent = result.repImgUrl.split('/')[3];
   prevImgUrl = result.repImgUrl;
   let categoryTitle = result.categoryId.categoryName;
   if (result.subcategoryId) {
@@ -119,7 +119,6 @@ async function createProduct() {
   const result = await API.post(
     `/api/admin/product/${productId}`,
     formData,
-    true,
     true,
   );
 

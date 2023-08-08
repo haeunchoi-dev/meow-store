@@ -1,6 +1,6 @@
-import { blockIfNotLogin } from '/utils/index.js';
+import { blockIfNotLogin } from '/views/utils/index.js';
 blockIfNotLogin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 const delivery = document.querySelector('.delivery');
 const deliveryReady = document.querySelector('.delivery-ready');
 const paymentComplete = document.querySelector('.complete');

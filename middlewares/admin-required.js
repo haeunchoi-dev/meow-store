@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken';
 import { getSecretKey } from '../jwt/secret-key';
 
 function adminRequired(req, res, next) {
-  const userToken =
-    (req.headers['Authorization'] &&
-      req.headers['Authorization'].split(' ')[1]) ||
-    (req.headers['authorization'] &&
-      req.headers['authorization'].split(' ')[1]);
-
+  // const userToken =
+  //   (req.headers['Authorization'] &&
+  //     req.headers['Authorization'].split(' ')[1]) ||
+  //   (req.headers['authorization'] &&
+  //     req.headers['authorization'].split(' ')[1]);
+  const userToken = req.cookies.loginToken;
   if (!userToken || userToken === 'null') {
     res.status(403).json({
       result: 'forbidden-approach',
@@ -37,7 +37,10 @@ function adminRequired(req, res, next) {
 
     next();
   } catch (error) {
-    next(error);
+    res.clearCookie('loginToken').clearCookie('isAdmin').status(403).json({
+      result: 'forbidden-approach',
+      reason: '정상적인 토큰이 아닙니다.',
+    });
 
     return;
   }

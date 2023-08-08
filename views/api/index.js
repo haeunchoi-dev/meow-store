@@ -1,133 +1,146 @@
-async function get(endpoint, params = '', errorAlert = true) {
+import {
+  addLoadingBar,
+  removeLoadingBar,
+} from '/views/components/LoadingBar.js';
+
+async function get(endpoint, params = '', isLoading = false) {
   const apiUrl = `${endpoint}${params}`;
+  try {
+    if (isLoading) addLoadingBar();
+    const res = await fetch(apiUrl);
 
-  const res = await fetch(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
+    const result = await res.json();
 
-  const result = await res.json();
+    if (!res.ok) {
+      const { message } = result;
 
-  if (!res.ok) {
-    const { message } = result;
-
-    if (message && errorAlert) {
-      alert(message);
       throw new Error(message);
     }
+    return result;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (isLoading) removeLoadingBar();
   }
-  return result;
 }
 
-async function post(endpoint, data, errorAlert = true, isForm = false) {
-  const apiUrl = endpoint;
-  const bodyData = isForm ? data : JSON.stringify(data);
+async function post(endpoint, data = {}, isForm = false, isLoading = false) {
+  try {
+    if (isLoading) addLoadingBar();
+    const apiUrl = endpoint;
+    const bodyData = isForm ? data : JSON.stringify(data);
 
-  let headers = {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  };
-  if (!isForm) {
-    headers['Content-Type'] = 'application/json';
-  }
+    let headers = {};
+    if (!isForm) {
+      headers['Content-Type'] = 'application/json';
+    }
 
-  const res = await fetch(apiUrl, {
-    method: 'POST',
-    headers: headers,
-    body: bodyData,
-  });
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: headers,
+      body: bodyData,
+    });
 
-  const result = await res.json();
+    const result = await res.json();
 
-  if (!res.ok) {
-    const { message } = result;
+    if (!res.ok) {
+      const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
       throw new Error(message);
     }
+    return result;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (isLoading) removeLoadingBar();
   }
-  return result;
 }
 
-async function patch(endpoint, params = '', data, errorAlert = true) {
-  const apiUrl = `${endpoint}${params}`;
-  const bodyData = JSON.stringify(data);
+async function patch(endpoint, params = '', data = {}, isLoading = false) {
+  try {
+    if (isLoading) addLoadingBar();
+    const apiUrl = `${endpoint}${params}`;
+    const bodyData = JSON.stringify(data);
 
-  const res = await fetch(apiUrl, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: bodyData,
-  });
+    const res = await fetch(apiUrl, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: bodyData,
+    });
 
-  const result = await res.json();
+    const result = await res.json();
 
-  if (!res.ok) {
-    const { message } = result;
+    if (!res.ok) {
+      const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
       throw new Error(message);
     }
-  }
 
-  return result;
+    return result;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (isLoading) removeLoadingBar();
+  }
 }
 
-async function put(endpoint, params = '', data, errorAlert = true) {
-  const apiUrl = `${endpoint}${params}`;
-  const bodyData = JSON.stringify(data);
+async function put(endpoint, params = '', data = {}, isLoading = false) {
+  try {
+    const apiUrl = `${endpoint}${params}`;
+    const bodyData = JSON.stringify(data);
 
-  const res = await fetch(apiUrl, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: bodyData,
-  });
+    const res = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: bodyData,
+    });
 
-  const result = await res.json();
+    const result = await res.json();
 
-  if (!res.ok) {
-    const { message } = result;
+    if (!res.ok) {
+      const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
       throw new Error(message);
     }
-  }
 
-  return result;
+    return result;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (isLoading) removeLoadingBar();
+  }
 }
 
-async function del(endpoint, params = '', data, errorAlert = true) {
-  const apiUrl = `${endpoint}${params}`;
-  const bodyData = JSON.stringify(data);
+async function del(endpoint, params = '', data = {}, isLoading = false) {
+  try {
+    const apiUrl = `${endpoint}${params}`;
+    const bodyData = JSON.stringify(data);
 
-  const res = await fetch(apiUrl, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: bodyData,
-  });
+    const res = await fetch(apiUrl, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: bodyData,
+    });
 
-  const result = await res.json();
+    const result = await res.json();
 
-  if (!res.ok) {
-    const { message } = result;
+    if (!res.ok) {
+      const { message } = result;
 
-    if (message && errorAlert) {
-      alert(message);
       throw new Error(message);
     }
+    return result;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (isLoading) removeLoadingBar();
   }
-  return result;
 }
 
 export { get, post, patch, put, del as delete };

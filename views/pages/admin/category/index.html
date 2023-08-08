@@ -9,17 +9,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="../../../common/global.css" />
+    <script type="module" src="/views/components/AdminHeader.js"></script>
+    <script type="module" src="/views/components/CommonFooter.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <script type="module" src="index.js" defer></script>
-    <script defer src="/components/admin-header.js"></script>
-    <script src="../../../components/footer.js" defer></script>
-    <script type="module" src="../../../api/index.js" defer></script>
+    <script type="module" src="index.js" ></script>
 
   </head>
   <body>
     <!-- header -->
-    <header class="header"></header>
+    <admin-header></admin-header>
     <!-- main -->
     <main>
       <section class="content-wrap">
@@ -60,6 +58,6 @@
         </div>
     </section>
     </main>
-    <footer class="footer"></footer>
+    <common-footer></common-footer>
   </body>
 </html>

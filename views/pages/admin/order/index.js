@@ -1,5 +1,5 @@
-import * as API from '/api/index.js';
-import { blockIfNotAdmin } from '/utils/index.js';
+import * as API from '/views/api/index.js';
+import { blockIfNotAdmin } from '/views/utils/index.js';
 blockIfNotAdmin();
 let flag = false;
 async function getOrderList() {

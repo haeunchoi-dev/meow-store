@@ -1,4 +1,4 @@
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 class CategoryModal extends HTMLElement {
   constructor() {
     super();

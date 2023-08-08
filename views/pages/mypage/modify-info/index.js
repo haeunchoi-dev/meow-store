@@ -1,6 +1,6 @@
-import { blockIfNotLogin } from '/utils/index.js';
+import { blockIfNotLogin } from '/views/utils/index.js';
 blockIfNotLogin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 const addressValue = document.querySelector('#address-input');
 const cansleButton = document.querySelector('.cansle-button');
 const email = document.querySelector('.email');

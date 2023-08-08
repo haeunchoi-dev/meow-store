@@ -89,9 +89,9 @@ class Swagger {
 
         /* open api 3.0.0 version option */
         produces: swaggerProduces,
-        components: {
-          securitySchemes: swaggerSecurityScheme,
-        },
+        // components: {
+        //   securitySchemes: swaggerSecurityScheme,
+        // },
         tags: swaggerTags,
       },
       apis: [],

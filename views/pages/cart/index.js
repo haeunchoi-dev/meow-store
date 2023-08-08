@@ -1,4 +1,7 @@
-let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
+import Cart from '/views/store/cart.js';
+import { getCookie } from '/views/utils/index.js';
+
+let savedCartData = Cart.selectAll();
 const cartList = document.querySelector('.cart_list');
 let priceSum = 0;
 const priceSumElement = document.querySelector('#price_sum');
@@ -16,12 +19,14 @@ for (let i = 0; i < savedCartData.length; ++i) {
           <span>${data.name}</span>
         </div>
         <div class="qty_wrap">
-          <button class="qty_down button is-light" onclick="qtyDown(event)">-</button>
+          <button class="qty_down button is-light" name="qty_down" >-</button>
           <span class="product_qty" name="product_qty" >${data.qty}</span>
-          <button class="qty_up button is-light" onclick="qtyUp(event)">+</button>
+          <button class="qty_up button is-light" name="qty_up" >+</button>
         </div>
-        <span class="product_price">${data.price.toLocaleString()} 원</span>
-        <button class="delete_each button is-light" onclick="deleteEach(event)">삭제</button>
+        <span class="product_price" price="${
+          data.price
+        }" >${data.price.toLocaleString()} 원</span>
+        <button class="delete_each button is-light" name="delete_each">삭제</button>
       </div>
     </div>
   `;
@@ -33,75 +38,90 @@ for (let i = 0; i < savedCartData.length; ++i) {
 }
 priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
-const qtyUpBtns = document.querySelectorAll('.qty_up');
-const qtyDownBtns = document.querySelectorAll('.qty_down');
-const qtyElements = document.querySelectorAll('.product_qty');
-const deleteEachBtns = document.querySelectorAll('.delete_each');
+//event
+cartList.addEventListener('click', (e) => {
+  const target = e.target;
+  const name = target.getAttribute('name');
+  if (name === 'qty_down') {
+    qtyDown(target);
+  } else if (name === 'qty_up') {
+    qtyUp(target);
+  } else if (name === 'delete_each') {
+    deleteEach(target);
+  }
+});
+
 const deleteAllBtn = document.querySelector('.delete_all');
 const orderBtn = document.querySelector('#order_btn');
 
-function qtyUp(event) {
-  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
-  const id = event.target.closest('.product_wrap').getAttribute('product_id');
+function qtyUp(target) {
+  const qtyElement = target.closest('div').querySelector('[name=product_qty]');
+  const productPrice = target
+    .closest('.product_wrap')
+    .querySelector('.product_price')
+    .getAttribute('price');
 
-  if (qtyElement.innerText === '9') {
+  const id = target.closest('.product_wrap').getAttribute('product_id');
+  const qty = Number(qtyElement.innerText);
+  if (qty === 9) {
     alert('최대 구매 수량은 9개입니다.');
   } else {
-    qtyElement.innerText = Number(qtyElement.innerText) + 1;
-    savedCartData = savedCartData.map((o) => {
-      if (o._id === id) {
-        o.qty += 1;
-        priceSum += o.price;
-        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
-      }
-      return o;
+    qtyElement.innerText = qty + 1;
+    Cart.update({
+      id,
+      qty: qty + 1,
     });
-    localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+    priceSum += Number(productPrice);
+    priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
   }
 }
 
-function qtyDown(event) {
-  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
-  const id = event.target.closest('.product_wrap').getAttribute('product_id');
-
-  if (Number(qtyElement.innerText) > 1) {
-    qtyElement.innerText = Number(qtyElement.innerText) - 1;
-    savedCartData = savedCartData.map((o) => {
-      if (o._id === id) {
-        o.qty -= 1;
-        priceSum -= o.price;
-        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
-      }
-      return o;
+function qtyDown(target) {
+  const qtyElement = target.closest('div').querySelector('[name=product_qty]');
+  const productPrice = target
+    .closest('.product_wrap')
+    .querySelector('.product_price')
+    .getAttribute('price');
+  const id = target.closest('.product_wrap').getAttribute('product_id');
+  const qty = Number(qtyElement.innerText);
+  if (qty > 1) {
+    qtyElement.innerText = qty - 1;
+    Cart.update({
+      id,
+      qty: qty - 1,
     });
-    localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+    priceSum -= Number(productPrice);
+    priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
   }
 }
 
-function deleteEach(event) {
-  const id = event.target.closest('.product_wrap').getAttribute('product_id');
-  const li = event.target.closest('.product_wrap').parentElement;
+function deleteEach(target) {
+  const id = target.closest('.product_wrap').getAttribute('product_id');
+  const li = target.closest('.product_wrap').parentElement;
+  const productPrice = target
+    .closest('.product_wrap')
+    .querySelector('.product_price')
+    .getAttribute('price');
   li.remove();
 
-  const price = savedCartData.filter((o) => o._id === id)[0].price;
-  const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
+  const price = Number(productPrice);
+  const qty = target.closest('.product_wrap').querySelector('.product_qty');
 
   priceSum -= price * Number(qty.innerText);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
-  savedCartData = savedCartData.filter((o) => o._id !== id);
-  if (savedCartData.length === 0) {
-    localStorage.removeItem('meowStoreCart');
-    priceSumElement.innerText = '0 원';
-  } else {
-    localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
-  }
+  Cart.remove({ _id: id }, (items) => {
+    if (items.length === 0) {
+      priceSumElement.innerText = '0 원';
+      Cart.removeAll();
+    }
+  });
 }
 
 function deleteAll() {
   const userConfirm = confirm('장바구니를 비우시겠습니까?');
   if (userConfirm) {
-    localStorage.removeItem('meowStoreCart');
+    Cart.removeAll();
     cartList.innerHTML = '';
     priceSumElement.innerText = '0 원';
   }
@@ -109,10 +129,13 @@ function deleteAll() {
 deleteAllBtn.addEventListener('click', deleteAll);
 
 orderBtn.addEventListener('click', () => {
-  if (!localStorage.getItem('meowStoreCart')) {
+  if (Cart.count({}) === 0) {
     alert('장바구니에 상품이 없습니다.');
     return;
   }
-  if (localStorage.getItem('token')) location.href = '/order-create/';
-  else alert("로그인 후 주문 가능합니다.");
+  if (!getCookie('loginToken')) {
+    alert('로그인 후 주문 가능합니다.');
+    return;
+  }
+  location.href = '/order-create/';
 });

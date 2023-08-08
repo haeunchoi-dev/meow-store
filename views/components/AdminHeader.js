@@ -1,3 +1,4 @@
+import { getCookie } from '/views/utils/index.js';
 class AdminHeader extends HTMLElement {
   constructor() {
     super();
@@ -176,7 +177,7 @@ class AdminHeader extends HTMLElement {
         <div class="logo">
         <div class="img-box">
             <a href ='/admin/product/'>
-                <img src="http://${location.host}/assets/로고.png" alt="로고">
+                <img src="http://${location.host}/views/assets/로고.png" alt="로고">
             </a>
         </div>
         <div class="span-container">
@@ -202,11 +203,11 @@ class AdminHeader extends HTMLElement {
 
   setEvent() {
     const self = this;
-    const admin = window.localStorage.getItem('admin');
+    const admin = getCookie('isAdmin');
     const userHome = self.shadow.querySelector('.user-home');
     const mainNav = self.shadow.querySelector('.mainNav');
 
-    if (admin) {
+    if (admin === 'true') {
       userHome.style.display = 'inline-block';
       userHome.addEventListener('click', function () {
         window.location.href = '/';

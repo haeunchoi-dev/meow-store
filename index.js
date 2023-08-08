@@ -1,21 +1,12 @@
 import 'dotenv/config';
+import path from 'path';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { generateSecretKey } from './jwt/secret-key';
 import connectDB from './config/db';
-import {
-  memberOrderRouter,
-  memberOrdersRouter,
-  adminProductRouter,
-  adminCategoryRouter,
-  adminSubCategoryRouter,
-  productRouter,
-  productsRouter,
-  adminOrderRouter,
-  adminOrdersRouter,
-  userRouter,
-} from './routes';
-import ApiDcos from './docs/index';
+import apiRouter from './routes';
+import { getSwaggerOption } from './utils/swagger-option';
 
 connectDB();
 
@@ -24,36 +15,27 @@ generateSecretKey();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static('views/pages'));
-app.use('/assets', express.static('views/assets'));
-app.use('/components', express.static('views/components'));
-app.use('/utils', express.static('views/utils'));
-app.use('/common', express.static('views/common'));
-app.use('/uploads', express.static('views/uploads'));
-app.use('/api', express.static('views/api'));
+app.use('/api', apiRouter);
 
-app.use('/api/products', productsRouter);
-app.use('/api/product', productRouter);
-app.use('/api/member/order', memberOrderRouter);
-app.use('/api/member/orders', memberOrdersRouter);
-app.use('/api/admin/product', adminProductRouter);
-app.use('/api/admin/category', adminCategoryRouter);
-app.use('/api/admin/subcategory', adminSubCategoryRouter);
-app.use('/api/admin/order', adminOrderRouter);
-app.use('/api/admin/orders', adminOrdersRouter);
-app.use('/api/user', userRouter);
+app.use('/views', express.static(path.join(__dirname, 'views')));
+app.use('/', express.static(path.join(__dirname, 'views/pages')));
 
 //swagger 적용
-function getSwaggerOption() {
-  const apiDocs = new ApiDcos();
-  apiDocs.init();
-
-  return apiDocs.getSwaggerOption();
-}
 const { swaggerUI, specs, setUpoption } = getSwaggerOption();
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, setUpoption));
+
+app.use((req, res, next) => {
+  res.status(404).redirect('/not-found');
+});
+
+//error
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500);
+  res.json({ success: false, status: err.status, message: err.message });
+});
 
 const PORT = process.env.PORT || 3000;
 

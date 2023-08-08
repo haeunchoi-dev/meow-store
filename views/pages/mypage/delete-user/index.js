@@ -1,6 +1,6 @@
-import { blockIfNotLogin } from '/utils/index.js';
+import { blockIfNotLogin } from '/views/utils/index.js';
 blockIfNotLogin();
-import * as API from '/api/index.js';
+import * as API from '/views/api/index.js';
 // confirm창이 2번뜨는 문제 발생
 const deleteButton = document.getElementById('delete-button');
 
@@ -13,18 +13,15 @@ async function deleteUser() {
     return false;
   }
   if (confirm('정말 탈퇴하시겠습니까?')) {
-    // const data = await API.get(`/api/user/mypage/`);
-    // console.log(data._id);
-    const result = await API.delete('/api/user/mypage', '', {
-      password,
-    });
-    console.log(result);
-    if (localStorage.getItem('admin')) {
-      localStorage.removeItem('admin');
+    try {
+      await API.delete('/api/user/mypage', '', {
+        password,
+      });
+      alert('탈퇴가 완료 되었습니다.');
+      window.location.href = '/';
+    } catch (err) {
+      alert(err.message);
     }
-    localStorage.removeItem('token');
-    alert('탈퇴가 완료 되었습니다.');
-    window.location.href = '/';
   } else {
     console.log('취소');
   }
