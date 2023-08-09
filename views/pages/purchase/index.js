@@ -1,8 +1,9 @@
 import { blockIfNotLogin } from '/views/utils/index.js';
-blockIfNotLogin();
 import * as API from '/views/api/index.js';
 
-async function getOrderSummary() {
+blockIfNotLogin();
+
+(async function getOrderSummary() {
   const jsonData = await API.get('/api/member/orders');
   const purchaseList = document.querySelector('.content-wrap');
 
@@ -49,8 +50,7 @@ async function getOrderSummary() {
       const orderId = target.closest('.purchase-item').getAttribute('id');
       //주문취소 api 호출
       if (confirm('주문을 취소하시겠습니까?')) {
-        const result = await API.post(`/api/member/order/${orderId}`);
-        console.log(result);
+        await API.post(`/api/member/order/${orderId}`);
         target.classList.add('none');
         target
           .closest('.purchase-item')
@@ -58,6 +58,4 @@ async function getOrderSummary() {
       }
     }
   });
-}
-
-getOrderSummary();
+})();
