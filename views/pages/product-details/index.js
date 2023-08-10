@@ -1,10 +1,22 @@
+import { getUrlParams } from '/views/utils/index.js';
 import Cart from '/views/store/cart.js';
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
-const infoBox = document.querySelector('#info_box');
+
 let productData = {};
 
+showProductData();
+
+async function showProductData() {
+  const urlParams = getUrlParams();
+  if (!('id' in urlParams)) {
+    location.href = '/';
+  }
+
+  const id = urlParams.id;
+  getProductData(id);
+}
+
 async function getProductData(id) {
+  const infoBox = document.querySelector('#info_box');
   try {
     const response = await fetch(`/api/product/${id}`, {
       method: 'GET',
@@ -45,8 +57,6 @@ async function getProductData(id) {
   }
 }
 
-getProductData(id);
-
 function addToCart() {
   if (Cart.count({}) === 0) {
     Cart.insert(productData, () => {
@@ -56,7 +66,6 @@ function addToCart() {
     return;
   }
   const findData = Cart.findById(productData._id);
-  console.log(findData);
 
   if (findData) {
     const userConfirm = confirm(

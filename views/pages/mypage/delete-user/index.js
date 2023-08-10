@@ -1,9 +1,9 @@
 import { blockIfNotLogin } from '/views/utils/index.js';
-blockIfNotLogin();
 import * as API from '/views/api/index.js';
+
+blockIfNotLogin();
 // confirm창이 2번뜨는 문제 발생
 const deleteButton = document.getElementById('delete-button');
-
 deleteButton.addEventListener('click', deleteUser);
 
 async function deleteUser() {

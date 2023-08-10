@@ -52,15 +52,6 @@ export const compressString = (string) => {
   return string;
 };
 
-// 주소에 특정 params가 없다면 잘못된 접근으로 하고 싶은 경우 사용.
-export const checkUrlParams = (key) => {
-  const { [key]: params } = getUrlParams();
-
-  if (!params) {
-    window.location.replace('/page-not-found');
-  }
-};
-
 export const getUrlParams = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

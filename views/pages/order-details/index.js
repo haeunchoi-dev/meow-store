@@ -1,14 +1,15 @@
-import { blockIfNotLogin, isNull } from '/views/utils/index.js';
-blockIfNotLogin();
+import { blockIfNotLogin, isNull, getUrlParams } from '/views/utils/index.js';
 import * as API from '/views/api/index.js';
 
-const urlParams = new URLSearchParams(window.location.search); // http://localhost:3000/product-details/?id=64a8b5c760e6ded9c555e247
-const id = urlParams.get('id');
+blockIfNotLogin();
 
-if (!id) {
+const urlParams = getUrlParams();
+if (!('id' in urlParams)) {
   location.href = '/';
 }
 
+const id = urlParams.id;
+/* 주문 정보 */
 const infoResetBtn = document.getElementById('infoResetBtn');
 const infoChangeBtn = document.getElementById('infoChangeBtn');
 const infoEditModeBtn = document.getElementById('infoEditModeBtn');
@@ -28,31 +29,57 @@ const shippingMessageInput = document.getElementById('shippingMessageInput');
 const shippingInfoDiv = document.getElementById('shippingInfoDiv');
 const totalAmountDiv = document.getElementById('totalAmount');
 let isCancle = true;
+/* 제품 리스트 */
+const orderContainer = document.getElementById('orderContainer');
+const resetBtn = document.getElementById('resetBtn');
+const changeBtn = document.getElementById('changeBtn');
+const editModeBtn = document.getElementById('editModeBtn');
+const orderTbody = document.getElementById('orderTbody');
+const cacleTotalAmountDiv = document.getElementById('cacleTotalAmount');
+let cacleTotalAmount = 0;
+let cancleProductList = [];
 
-infoResetBtn.addEventListener('click', () => {
-  initEditShippingInfo();
-  showShippingViewMode();
-});
-infoChangeBtn.addEventListener('click', () => {
-  saveOrderDeatil();
-});
-infoEditModeBtn.addEventListener('click', showShippingEditMode);
+addAllElements();
+addShippingInfoEvents();
+addProductListEvents();
 
-zipCodeBtn.addEventListener('click', () => {
-  new daum.Postcode({
-    oncomplete: function (data) {
-      zipCodeInput.value = data.zonecode;
-      addressInput.value = data.address;
-    },
-  }).open();
-});
+async function addAllElements() {
+  await getOrderDetail();
+}
 
-getOrderDetail();
+function addShippingInfoEvents() {
+  infoResetBtn.addEventListener('click', () => {
+    initEditShippingInfo();
+    showShippingViewMode();
+  });
+  infoChangeBtn.addEventListener('click', () => {
+    saveOrderDeatil();
+  });
+  infoEditModeBtn.addEventListener('click', showShippingEditMode);
+
+  zipCodeBtn.addEventListener('click', () => {
+    new daum.Postcode({
+      oncomplete: function (data) {
+        zipCodeInput.value = data.zonecode;
+        addressInput.value = data.address;
+      },
+    }).open();
+  });
+}
+
+function addProductListEvents() {
+  resetBtn.addEventListener('click', () => {
+    initEditInfo();
+    showViewMode();
+  });
+  changeBtn.addEventListener('click', () => {
+    saveChangeProduct();
+  });
+  editModeBtn.addEventListener('click', showEditMode);
+}
 
 async function getOrderDetail() {
   const data = await API.get(`/api/member/order/${id}`);
-
-  console.log(data);
 
   //수정모드 판별
   //결제완료 단계에서만 수정가능
@@ -89,6 +116,7 @@ function checkValidation() {
 
   return true;
 }
+
 async function saveOrderDeatil() {
   //validation 필요함
   if (!checkValidation()) return;
@@ -100,7 +128,7 @@ async function saveOrderDeatil() {
     detailAddress: detailAddressInput.value,
     shippingMessage: shippingMessageInput.value,
   };
-  const result = await API.post(`/api/member/order/${id}/info`, data);
+  await API.post(`/api/member/order/${id}/info`, data);
 
   alert('배송지 정보가 수정되었습니다.');
   initShippingInfo(data);
@@ -149,25 +177,7 @@ function showShippingViewMode() {
   });
 }
 
-//여기서 부터 제품 리스트
-const orderContainer = document.getElementById('orderContainer');
-const resetBtn = document.getElementById('resetBtn');
-const changeBtn = document.getElementById('changeBtn');
-const editModeBtn = document.getElementById('editModeBtn');
-const orderTbody = document.getElementById('orderTbody');
-const cacleTotalAmountDiv = document.getElementById('cacleTotalAmount');
-let cacleTotalAmount = 0;
-let cancleProductList = [];
-
-resetBtn.addEventListener('click', () => {
-  initEditInfo();
-  showViewMode();
-});
-changeBtn.addEventListener('click', () => {
-  saveChangeProduct();
-});
-editModeBtn.addEventListener('click', showEditMode);
-
+/* 제품리스트 */
 function initProduct() {
   cancleProductList = [];
 }
@@ -224,7 +234,6 @@ function initProductList(list) {
 }
 
 async function saveChangeProduct() {
-  console.log(cancleProductList);
   if (cancleProductList.length > 0) {
     const result = await API.delete(`/api/member/order/${id}/products`, '', {
       orderItemIds: cancleProductList,
@@ -324,7 +333,6 @@ function checkStatus(status) {
   }
 }
 
-// 총액 업데이트
 function updateCancleTotalAmount() {
   if (cacleTotalAmount === 0) {
     cacleTotalAmountDiv.innerHTML = '';

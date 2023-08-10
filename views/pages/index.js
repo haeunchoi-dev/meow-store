@@ -96,10 +96,8 @@ async function getProductList(categoryId, subcategoryId = '') {
       : `?categoryId=${categoryId}${
           subcategoryId === '' ? '' : `&subcategoryId=${subcategoryId}`
         }`;
-  console.log(`${endpoint}${querystring}`);
   const result = await fetch(`${endpoint}${querystring}`);
   const jsonData = await result.json();
-  console.log(jsonData);
 
   //전체 아이템 표시
   const itemElements = jsonData.map(

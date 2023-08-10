@@ -31,9 +31,6 @@ window.onload = function () {
 };
 // HTML onclick 이벤트
 function register() {
-  console.log(phoneNumberInput.value);
-  // console.log(joinFlag);
-
   if (
     zipcodeInput.value === '' ||
     addressValue.value === '' ||
@@ -80,16 +77,9 @@ function register() {
       alert('회원가입 되었습니다.');
       window.location.href = '/login';
     });
-
-  // 로그인 페이지로 이동
 }
 
-// 로그에 2번찍힘
-// submitButton.addEventListener('click', function () {
-//   console.log('CLI');
-// });
 const validationCheck = () => {
-  // 이메일 validation
   emailInput.onblur = function () {
     let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
     if (!emailInput.value) {
@@ -109,8 +99,6 @@ const validationCheck = () => {
   };
   // 이름 validation
   nameValue.onblur = function () {
-    console.log(nameValue.value);
-    console.log(nameValue.value === '');
     if (nameValue.value === '') {
       nameSpan.style.display = 'block';
       nameFlag = false;
@@ -121,16 +109,14 @@ const validationCheck = () => {
   };
   phoneNumberInput.onblur = function () {
     let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    console.log(regPhone.test(phoneNumberInput.value));
+
     if (!regPhone.test(phoneNumberInput.value)) {
       phoneSpan.style.display = 'block';
       phoneSpan.textContent = '휴대폰 번호를 정확하게 입력하세요.';
       numberFlag = false;
       return;
     }
-    // 하이픈 달아주기
 
-    // const newphone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
     phoneNumberInput.value = phoneNumberInput.value.replace(
       /^(\d{2,3})(\d{3,4})(\d{4})$/,
       `$1-$2-$3`,
@@ -140,11 +126,3 @@ const validationCheck = () => {
   };
 };
 validationCheck();
-
-// sumitButton.addEventListener('click', function () {
-
-//   if (!nameValue.value) {
-//     alert('이름을 입력하세요');
-//     return;
-//   }
-// });
