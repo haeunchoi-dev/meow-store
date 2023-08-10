@@ -1,10 +1,13 @@
 import { blockIfNotLogin } from '/views/utils/index.js';
-blockIfNotLogin();
 import * as API from '/views/api/index.js';
+
+blockIfNotLogin();
+
 const delivery = document.querySelector('.delivery');
 const deliveryReady = document.querySelector('.delivery-ready');
 const paymentComplete = document.querySelector('.complete');
 
+getInfo();
 async function getInfo() {
   const result = await API.get('/api/member/orders');
   console.log(result);
@@ -27,4 +30,3 @@ async function getInfo() {
   deliveryReady.textContent = deliveryCount + '건';
   paymentComplete.textContent = paymentCompleteCount + '건';
 }
-getInfo();
